@@ -1,0 +1,7 @@
+dn: uid=workshopbdn,cn=admins,{{ freeipa_base_dn }}
+add:objectclass:account
+add:objectclass:simplesecurityobject
+add:uid:workshopbdn
+add:userPassword:{{ freeipa_server_ds_password }}
+add:passwordExpirationTime:20380119031407Z
+add:nsIdleTimeout:0

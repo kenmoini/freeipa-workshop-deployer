@@ -1,0 +1,57 @@
+---
+enable_certbot: false
+
+idm_provision_users: true
+idm_provision_users_prefix: student
+idm_provision_users_suffix:
+idm_provision_users_start: 0
+idm_provision_users_count: 50
+idm_provision_users_password: r3dh4t1!
+
+freeipa_server_admin_password: s3cur3P455W0rd
+freeipa_server_ds_password: s3cur3P455W0rd
+
+freeipa_server_domain: "{{ domain }}"
+freeipa_server_fqdn: "{{ idm_hostname }}.{{ domain }}"
+freeipa_server_ip: "{{ ansible_ssh_host }}"
+freeipa_server_realm: "{{ domain | upper }}"
+freeipa_server_manage_host: false
+freeipa_server_install_base_command: ipa-server-install --unattended
+freeipa_server_pkgs:
+  - bind
+  - bind-dyndb-ldap
+  - ipa-server
+  - python2-devel
+  - platform-python-devel
+  - ipa-server-common
+  - ipa-server-dns
+  - ipa-server-trust-ad
+  - krb5-devel
+  - "@Development tools"
+freeipa_server_pip_pkgs:
+  - custodia
+  - ipapython
+  - jwcrypto
+  - pyasn1-modules
+  - pyopenssl
+  - python-ldap
+freeipa_server_install_options:
+  - "--realm={{ freeipa_server_realm }}"
+  - "--domain={{ freeipa_server_domain }}"
+  - "--ds-password={{ freeipa_server_ds_password }}"
+  - "--admin-password={{ freeipa_server_admin_password }}"
+  - "--mkhomedir"
+  - "--hostname={{ freeipa_server_fqdn | default(ansible_fqdn) }}"
+  - "--no-ntp"
+#  - "--ip-address={{ freeipa_server_ip }}"
+#  - "--no-host-dns"
+#  - "--idstart=5000"
+#  - "--ssh-trust-dns"
+#  - "--no-dns"
+#  - "--setup-dns"
+#  - "--forwarder=8.8.8.8"
+#  - "--allow-zone-overlap"
+#  - "--ip-address={{ private_ip }}"
+#  - "--ip-address={{ ansible_ssh_host }}"
+#  - "--auto-forwarders"
+freeipa_base_dn: "DC={{ freeipa_server_domain.split('.') | join(',DC=') }}"
