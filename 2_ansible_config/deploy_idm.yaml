@@ -45,13 +45,17 @@
         delay: 5
         timeout: 300
       when: update_task_result is changed
+      delay: 10
+      register: wait_result
+      retries: 3
+      until: wait_result is succeeded
 
-    - name: Connect to instance and install Pip and base base packages
+    - name: Connect to instance and install base packages
       become: yes
       yum:
         disable_gpg_check: yes
         state: present
-        name: ['python2-pip', 'nano', 'firewalld', 'python3-libselinux', '@idm:DL1']
+        name: ['nano', 'firewalld', 'python3-libselinux', '@idm:DL1']
 
     - name: Disable SELinux
       selinux:
@@ -96,21 +100,21 @@
       register: result
       retries: 3
       until: result is succeeded
-  
-    - name: Update pip
-      pip:
-        name: pip
-        state: latest
-  
-    - name: Install FreeIPA server pip dependencies
-      pip:
-        name: "{{ freeipa_server_pip_pkgs }}"
-        state: present
-      delay: 10
-      register: result
-      retries: 3
-      until: result is succeeded
-
+#  
+#    - name: Update pip
+#      pip:
+#        name: pip
+#        state: latest
+#  
+#    - name: Install FreeIPA server pip dependencies
+#      pip:
+#        name: "{{ freeipa_server_pip_pkgs }}"
+#        state: present
+#      delay: 10
+#      register: result
+#      retries: 3
+#      until: result is succeeded
+#
     - name: Echo the FreeIPA server installer
       debug:
         msg: "{{ freeipa_server_install_base_command }} {{ freeipa_server_install_options | join(' ') }}"

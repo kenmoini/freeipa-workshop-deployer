@@ -21,20 +21,42 @@ freeipa_server_pkgs:
   - bind
   - bind-dyndb-ldap
   - ipa-server
-  - python2-devel
+  #- python2-devel
+  - openldap-devel
   - platform-python-devel
   - ipa-server-common
   - ipa-server-dns
   - ipa-server-trust-ad
   - krb5-devel
+  - python36-devel
+  - python3-ipapython
+  - python3-six
+  - python3-dns
+  - python3-cffi
+  - python3-idna
+  - python3-netaddr
+  - python3-gssapi
+  - python3-decorator
+  - python3-pyasn1
+  - python3-jwcrypto
+  - python3-pyOpenSSL
+  - python3-cryptography
+  - python3-pytest
+  - python3-ldap
+  - python3-argcomplete
+  - python3-argh
   - "@Development tools"
 freeipa_server_pip_pkgs:
   - custodia
-  - ipapython
+  - ipapython==4.8.7
   - jwcrypto
   - pyasn1-modules
   - pyopenssl
   - python-ldap
+  - paramiko
+  - cryptography
+  - pytest
+  - argparse-manpage
 freeipa_server_install_options:
   - "--realm={{ freeipa_server_realm }}"
   - "--domain={{ freeipa_server_domain }}"
