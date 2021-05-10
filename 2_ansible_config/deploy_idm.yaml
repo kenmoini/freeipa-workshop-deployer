@@ -71,7 +71,7 @@
         enabled: true
 
     - name: Connect to RH IDM server and set firewall
-      firewalld:
+      ansible.posix.firewalld:
         permanent: yes
         immediate: yes
         state: enabled
@@ -86,7 +86,7 @@
         - http
 
     - name: Connect to RH IDM server and set firewall for port 8080
-      firewalld:
+      ansible.posix.firewalld:
         permanent: yes
         immediate: yes
         state: enabled
@@ -127,6 +127,10 @@
   
     - name: Do initial kinit admin auth
       shell: "echo '{{ freeipa_server_admin_password }}' | kinit admin"
+
+    - name: Create workshopusers group
+      shell: "ipa group-add {{ idm_provision_users_group }}"
+      when: idm_provision_users
   
     - name: Create batch student users
       shell: "echo '{{ idm_provision_users_password }}' | ipa user-add {{ idm_provision_users_prefix }}{{ item }}{{ idm_provision_users_suffix }} --first=Student --last=User{{ item }} --password --shell=/bin/bash"
@@ -135,6 +139,11 @@
   
     - name: Set expiration out for a decade so users dont have to reset passwords
       shell: "ipa user-mod {{ idm_provision_users_prefix }}{{ item }}{{ idm_provision_users_suffix }} --setattr krbPasswordExpiration=20260420162000Z"
+      with_sequence: start={{ idm_provision_users_start }} count={{ idm_provision_users_count }}
+      when: idm_provision_users
+
+    - name: Add users to group
+      shell: "ipa group-add-member {{ idm_provision_users_group }} --users={{ idm_provision_users_prefix }}{{ item }}{{ idm_provision_users_suffix }}"
       with_sequence: start={{ idm_provision_users_start }} count={{ idm_provision_users_count }}
       when: idm_provision_users
   

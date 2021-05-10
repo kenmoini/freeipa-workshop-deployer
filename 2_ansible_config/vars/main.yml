@@ -2,6 +2,7 @@
 enable_certbot: false
 
 idm_provision_users: true
+idm_provision_users_group: workshopusers
 idm_provision_users_prefix: student
 idm_provision_users_suffix:
 idm_provision_users_start: 0

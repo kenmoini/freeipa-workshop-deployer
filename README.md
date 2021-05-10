@@ -1,8 +1,8 @@
 ## FreeIPA on Whatever with Terraform and Ansible
 
-This collection of content will utilize Terraform to provision the infrastructure needed to deploy a single FreeIPA/Red Hat Identity Management Server.  Currently it supports deploying to DigitalOcean, but other cloud providers are easy to adapt to by just creating a new set of Terraform files.
+This collection of content will utilize Terraform to provision the infrastructure needed to deploy a single FreeIPA/Red Hat Identity Management Server.  Currently it supports deploying to AWS and DigitalOcean, but other cloud providers are easy to adapt to by just creating a new set of Terraform files.
 
-Tested on CentOS 8.2
+Tested on CentOS/RHEL 8.3
 
 ## Deploying
 
