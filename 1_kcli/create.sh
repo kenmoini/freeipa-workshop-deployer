@@ -74,7 +74,7 @@ else
   sudo mkdir -p .generated/.${IDM_HOSTNAME}.${DOMAIN}
 fi
 
-cat >.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory<<EOF
+sudo tee .generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory >/dev/null <<EO
 ## Ansible Inventory template file used by Terraform to create an ./inventory file populated with the nodes it created
 
 [idm]
