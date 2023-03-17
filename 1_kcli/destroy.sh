@@ -11,6 +11,6 @@ else
     exit 1
 fi
 
-terraform destroy
+sudo kcli delete vm freeipa
 
 rm -rf ../.generated/

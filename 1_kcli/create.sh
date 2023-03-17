@@ -62,3 +62,7 @@ sudo python3 profile_generator/profile_generator.py update_yaml freeipa rhel9/te
 cat  kcli-profiles.yml
 cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
 sudo cp kcli-profiles.yml /root/.kcli/profiles.yml
+sudo kcli create vm -p freeipa freeipa
+IP_ADDRESS=$(sudo kcli info vm freeipa | grep ip: | awk '{print $2}')
+echo "IP Address: ${IP_ADDRESS}"
+echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | sudo tee -a /etc/hosts
