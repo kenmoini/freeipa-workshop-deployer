@@ -5,6 +5,7 @@
 sudo pwd
 
 ## Include vars if the file exists
+ls -lath . 
 FILE=../vars.sh
 if [ -f "$FILE" ]; then
     source ../vars.sh
