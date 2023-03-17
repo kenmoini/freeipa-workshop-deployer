@@ -14,7 +14,7 @@ else
 fi
 
 ## Include inventory if the file exists
-INVENTORY=../.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
+INVENTORY=.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
 if [ -f "$INVENTORY" ]; then
     echo "Inventory found, proceeding..."
 else
