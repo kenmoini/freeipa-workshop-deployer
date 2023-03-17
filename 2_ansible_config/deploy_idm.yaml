@@ -55,7 +55,7 @@
       yum:
         disable_gpg_check: yes
         state: present
-        name: ['nano', 'firewalld', 'python3-libselinux', '@idm:DL1']
+        name: ['nano', 'firewalld', 'python3-libselinux', 'ipa-client'] #'@idm:DL1']
 
     - name: Disable SELinux
       selinux:

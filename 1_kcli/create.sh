@@ -66,3 +66,22 @@ sudo kcli create vm -p freeipa freeipa
 IP_ADDRESS=$(sudo kcli info vm freeipa | grep ip: | awk '{print $2}')
 echo "IP Address: ${IP_ADDRESS}"
 echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | sudo tee -a /etc/hosts
+
+if [ -d .generated/.${IDM_HOSTNAME}.${DOMAIN} ]; then
+  echo "generated directory already exists"
+else
+  mkdir -p .generated/.${IDM_HOSTNAME}.${DOMAIN}
+fi
+
+cat >.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory<<EOF
+## Ansible Inventory template file used by Terraform to create an ./inventory file populated with the nodes it created
+
+[idm]
+${IDM_HOSTNAME}
+
+[all:vars]
+ansible_ssh_private_key_file=/root/.ssh/id_rsa
+ansible_ssh_user=cloud-user
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_internal_private_ip=${IP_ADDRESS}
+EOF
