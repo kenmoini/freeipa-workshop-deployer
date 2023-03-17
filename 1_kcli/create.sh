@@ -66,11 +66,12 @@ sudo kcli create vm -p freeipa freeipa -w
 IP_ADDRESS=$(sudo kcli info vm freeipa | grep ip: | awk '{print $2}')
 echo "IP Address: ${IP_ADDRESS}"
 echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | sudo tee -a /etc/hosts
+ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 1
 
 if [ -d .generated/.${IDM_HOSTNAME}.${DOMAIN} ]; then
   echo "generated directory already exists"
 else
-  mkdir -p .generated/.${IDM_HOSTNAME}.${DOMAIN}
+  sudo mkdir -p .generated/.${IDM_HOSTNAME}.${DOMAIN}
 fi
 
 cat >.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory<<EOF
