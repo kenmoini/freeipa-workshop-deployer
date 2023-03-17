@@ -21,4 +21,8 @@ if [ $INFRA_PROVIDER = "digitalocean" ]; then
   ./1_infra_digitalocean/create.sh
 fi
 
+if [ $INFRA_PROVIDER = "kcli" ]; then
+  ./1_infra_digitalocean/create.sh
+fi
+
 ./2_ansible_config/configure.sh

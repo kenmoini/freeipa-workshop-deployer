@@ -60,6 +60,7 @@ else
   exit 1
 fi
 
+cd /opt/qubinode-installer/kcli-plan-samples
 set_variables
 ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 2
 PASSWORD=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
