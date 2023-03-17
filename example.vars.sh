@@ -8,7 +8,7 @@ TERRAFORM_VERSION="0.13.4"
 DOMAIN="example.com"
 IDM_HOSTNAME="idm"
 
-INFRA_PROVIDER="aws" # aws or digitalocean
+INFRA_PROVIDER="aws" # aws or digitalocean or kcli
 
 AWS_VPC_ID="vpc-something"
 AWS_REGION="us-east-2"
