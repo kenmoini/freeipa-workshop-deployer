@@ -58,3 +58,5 @@ PASSWORD=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
 RHSM_ORG=$(yq eval '.rhsm_org' "${ANSIBLE_VAULT_FILE}")
 RHSM_ACTIVATION_KEY=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
 sudo python3 profile_generator/profile_generator.py update_yaml freeipa rhel9/template.yaml --image rhel-baseos-9.1-x86_64-kvm.qcow2 --user $USER --user-password ${PASSWORD} --rhnorg ${RHSM_ORG} --rhnactivationkey ${RHSM_ACTIVATION_KEY}
+cat  kcli-profiles.yml
+cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
