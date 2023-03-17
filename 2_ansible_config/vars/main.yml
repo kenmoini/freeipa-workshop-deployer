@@ -54,7 +54,7 @@ freeipa_server_pip_pkgs:
   - pytest
   - argparse-manpage
   - argh
-  - python3-pyOpenSSL
+  - pyOpenSSL
   - pytest
 freeipa_server_install_options:
   - "--realm={{ freeipa_server_realm }}"
