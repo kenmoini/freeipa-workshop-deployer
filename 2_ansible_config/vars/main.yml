@@ -44,7 +44,6 @@ freeipa_server_pkgs:
   - "@Development tools"
 freeipa_server_pip_pkgs:
   - custodia
-  - ipapython==4.8.7
   - jwcrypto
   - pyasn1-modules
   - pyopenssl
