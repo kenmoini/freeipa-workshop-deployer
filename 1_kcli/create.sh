@@ -45,6 +45,7 @@ function checkForProgramAndExit() {
 checkForProgramAndExit wget
 checkForProgramAndExit jq
 checkForProgramAndExit kcli
+checkForProgramAndExit ansiblesafe
 
 if [ -d /opt/qubinode-installer/kcli-plan-samples ]; then
   echo "kcli-plan-samples already exists"
@@ -60,3 +61,4 @@ RHSM_ACTIVATION_KEY=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
 sudo python3 profile_generator/profile_generator.py update_yaml freeipa rhel9/template.yaml --image rhel-baseos-9.1-x86_64-kvm.qcow2 --user $USER --user-password ${PASSWORD} --rhnorg ${RHSM_ORG} --rhnactivationkey ${RHSM_ACTIVATION_KEY}
 cat  kcli-profiles.yml
 cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
+sudo cp kcli-profiles.yml /root/.kcli/profiles.yml
