@@ -60,6 +60,7 @@ RHSM_ORG=$(yq eval '.rhsm_org' "${ANSIBLE_VAULT_FILE}")
 RHSM_ACTIVATION_KEY=$(yq eval '.rhsm_activationkey' "${ANSIBLE_VAULT_FILE}")
 sudo python3 profile_generator/profile_generator.py update_yaml freeipa rhel9/template.yaml --image rhel-baseos-9.1-x86_64-kvm.qcow2 --user $USER --user-password ${PASSWORD} --rhnorg ${RHSM_ORG} --rhnactivationkey ${RHSM_ACTIVATION_KEY}
 cat  kcli-profiles.yml
+sleep 30s
 cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
 sudo cp kcli-profiles.yml /root/.kcli/profiles.yml
 sudo kcli create vm -p freeipa freeipa -w

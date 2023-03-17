@@ -40,7 +40,6 @@ freeipa_server_pkgs:
   - python3-decorator
   - python3-pyasn1
   - python3-jwcrypto
-  - python3-pyOpenSSL
   - python3-cryptography
   - python3-pytest
   - python3-ldap
@@ -58,6 +57,7 @@ freeipa_server_pip_pkgs:
   - cryptography
   - pytest
   - argparse-manpage
+  - python3-pyOpenSSL
 freeipa_server_install_options:
   - "--realm={{ freeipa_server_realm }}"
   - "--domain={{ freeipa_server_domain }}"

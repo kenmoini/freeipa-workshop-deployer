@@ -55,7 +55,7 @@
       yum:
         disable_gpg_check: yes
         state: present
-        name: ['nano', 'firewalld', 'python3-libselinux', '@idm:DL1']
+        name: ['nano', 'firewalld', 'python3-libselinux', 'ipa-server'] # '@idm:DL1']
 
     - name: Disable SELinux
       selinux:
@@ -100,21 +100,21 @@
       register: result
       retries: 3
       until: result is succeeded
-#  
-#    - name: Update pip
-#      pip:
-#        name: pip
-#        state: latest
-#  
-#    - name: Install FreeIPA server pip dependencies
-#      pip:
-#        name: "{{ freeipa_server_pip_pkgs }}"
-#        state: present
-#      delay: 10
-#      register: result
-#      retries: 3
-#      until: result is succeeded
-#
+  
+    - name: Update pip
+      pip:
+        name: pip
+        state: latest
+          
+    - name: Install FreeIPA server pip dependencies
+      pip:
+        name: "{{ freeipa_server_pip_pkgs }}"
+        state: present
+      delay: 10
+      register: result
+      retries: 3
+      until: result is succeeded
+
     - name: Echo the FreeIPA server installer
       debug:
         msg: "{{ freeipa_server_install_base_command }} {{ freeipa_server_install_options | join(' ') }}"
