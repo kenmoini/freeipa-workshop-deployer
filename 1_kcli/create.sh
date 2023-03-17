@@ -40,15 +40,7 @@ function checkForProgramAndExit() {
 # PROFILES_FILE - The name of the kcli profiles file
 # SECURE_DEPLOYMENT - The value of the secure deployment variable
 # INSTALL_RHEL_IMAGES - Set the vault to true if you want to install the RHEL images
-function set_variables() {
-    export ANSIBLE_SAFE_VERSION="0.0.4"
-    export ANSIBLE_VAULT_FILE="$HOME/quibinode_navigator/inventories/localhost/group_vars/control/vault.yml"
-    KCLI_CONFIG_DIR="${HOME}/.kcli"
-    KCLI_CONFIG_FILE="${KCLI_CONFIG_DIR}/profiles.yml"
-    PROFILES_FILE="kcli-profiles.yml"
-    SECURE_DEPLOYMENT="false"
-    INSTALL_RHEL_IMAGES="false"
-}
+
 
 checkForProgramAndExit wget
 checkForProgramAndExit jq
@@ -61,7 +53,6 @@ else
 fi
 
 cd /opt/qubinode-installer/kcli-plan-samples
-set_variables
 ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 2
 PASSWORD=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
 RHSM_ORG=$(yq eval '.rhsm_org' "${ANSIBLE_VAULT_FILE}")
