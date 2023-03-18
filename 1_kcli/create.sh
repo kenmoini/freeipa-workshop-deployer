@@ -73,7 +73,7 @@ else
   sudo mkdir -p .generated/.${IDM_HOSTNAME}.${DOMAIN}
 fi
 
-sudo tee .generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory >/dev/null <<EOF
+cat >/tmp/inventory<<EOF
 ## Ansible Inventory template file used by Terraform to create an ./inventory file populated with the nodes it created
 
 [idm]
@@ -81,7 +81,9 @@ ${IDM_HOSTNAME}
 
 [all:vars]
 ansible_ssh_private_key_file=/root/.ssh/id_rsa
-ansible_ssh_user=cloud-user
+ansible_ssh_user=centos
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_internal_private_ip=${IP_ADDRESS}
 EOF
+
+sudo mv /tmp/inventory .generated/.${IDM_HOSTNAME}.${DOMAIN}/
