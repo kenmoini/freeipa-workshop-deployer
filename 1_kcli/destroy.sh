@@ -11,6 +11,8 @@ else
     exit 1
 fi
 
+echo "Destroying the infrastructure..."
+echo "sudo kcli delete vm freeipa"
 sudo kcli delete vm freeipa
 
 rm -rf ../.generated/
