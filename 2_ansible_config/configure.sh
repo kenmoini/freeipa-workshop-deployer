@@ -44,14 +44,16 @@ function checkForProgramAndExit() {
 checkForProgramAndExit ansible-playbook
 
 if [ $INFRA_PROVIDER = "kcli" ]; then
-  sudo ansible-playbook -i .generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory \
+  sudo ansible-playbook -i  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory \
   --extra-vars "idm_hostname=${IDM_HOSTNAME}" \
   --extra-vars "domain=${DOMAIN}" \
-2_ansible_config/deploy_idm.yaml
+  --extra-vars "dns_forwarder=${DNS_FORWARDER}" \
+  2_ansible_config/deploy_idm.yaml
 else
     ansible-playbook -i ../.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory \
     --extra-vars "idm_hostname=${IDM_HOSTNAME}" \
     --extra-vars "domain=${DOMAIN}" \
+    --extra-vars "dns_forwarder=${DNS_FORWARDER}" \
     deploy_idm.yaml
 fi
 

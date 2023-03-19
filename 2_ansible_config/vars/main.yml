@@ -15,6 +15,7 @@ freeipa_server_ds_password: s3cur3P455W0rd
 freeipa_server_domain: "{{ domain }}"
 freeipa_server_fqdn: "{{ idm_hostname }}.{{ domain }}"
 freeipa_server_ip: "{{ ansible_ssh_host }}"
+dns_forwarder:  "{{ dns_forwarder }}"
 freeipa_server_realm: "{{ domain | upper }}"
 freeipa_server_manage_host: false
 freeipa_server_install_base_command: ipa-server-install --unattended
@@ -64,13 +65,13 @@ freeipa_server_install_options:
   - "--mkhomedir"
   - "--hostname={{ freeipa_server_fqdn | default(ansible_fqdn) }}"
   - "--no-ntp"
+  - "--forwarder={{ dns_forwarder }}"
 #  - "--ip-address={{ freeipa_server_ip }}"
 #  - "--no-host-dns"
 #  - "--idstart=5000"
 #  - "--ssh-trust-dns"
 #  - "--no-dns"
 #  - "--setup-dns"
-#  - "--forwarder=8.8.8.8"
 #  - "--allow-zone-overlap"
 #  - "--ip-address={{ private_ip }}"
 #  - "--ip-address={{ ansible_ssh_host }}"

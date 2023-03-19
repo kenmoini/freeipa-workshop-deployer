@@ -6,6 +6,7 @@ TERRAFORM_INSTALL="false"
 TERRAFORM_VERSION="0.13.4"
 
 DOMAIN="example.com"
+DNS_FORWARDER="1.1.1.1"
 IDM_HOSTNAME="idm"
 
 INFRA_PROVIDER="aws" # aws or digitalocean or kcli

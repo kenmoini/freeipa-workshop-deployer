@@ -67,10 +67,10 @@ echo "IP Address: ${IP_ADDRESS}"
 echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | sudo tee -a /etc/hosts
 ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 1
 
-if [ -d .generated/.${IDM_HOSTNAME}.${DOMAIN} ]; then
+if [ -d $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN} ]; then
   echo "generated directory already exists"
 else
-  sudo mkdir -p .generated/.${IDM_HOSTNAME}.${DOMAIN}
+  sudo mkdir -p  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}
 fi
 
 cat >/tmp/inventory<<EOF
@@ -86,4 +86,4 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_internal_private_ip=${IP_ADDRESS}
 EOF
 
-sudo mv /tmp/inventory .generated/.${IDM_HOSTNAME}.${DOMAIN}/
+sudo mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/

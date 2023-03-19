@@ -16,3 +16,9 @@ echo "sudo kcli delete vm freeipa"
 sudo kcli delete vm freeipa
 
 rm -rf ../.generated/
+cat >/tmp/resolv.conf<<EOF
+search ${DOMAIN}
+domain ${DOMAIN}
+nameserver ${DNS_FORWARDER}
+EOF
+sudo mv /tmp/resolv.conf /etc/resolv.conf
