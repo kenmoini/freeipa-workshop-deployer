@@ -210,7 +210,7 @@
       shell: "/opt/freeipa-letsencrypt/renew-le.sh --first-time"
       when: enable_certbot
 
-    - name: update KVM host /etc/resolv.conf to point to the IdM server {{ vm_name }}
+    - name: update KVM host /etc/resolv.conf to point to the IdM server
       vars:
         ansible_python_interpreter: /usr/bin/python3
       copy:
@@ -219,8 +219,6 @@
           nameserver {{ freeipa_server_ip }}
           nameserver {{ dns_forwarder }}
         dest: /etc/resolv.conf
-      when: 
-        - not force_idm_redeployment|bool and not vm_teardown|bool
       delegate_to: 127.0.0.1
 
   handlers:

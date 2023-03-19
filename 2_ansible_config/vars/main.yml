@@ -76,3 +76,11 @@ freeipa_server_install_options:
   - "--ip-address={{ private_ip }}"
   - "--auto-forwarders"
 freeipa_base_dn: "DC={{ freeipa_server_domain.split('.') | join(',DC=') }}"
+names:
+  - host01
+  - host02
+  - host03
+hostvars:
+  host01: 192.168.1.112
+  host02: 192.168.1.122
+  host03: 192.168.1.132
