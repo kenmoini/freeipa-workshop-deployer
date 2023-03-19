@@ -1,7 +1,7 @@
 # Dynamic DNS
 Dynamic DNS is a Python script for managing DNS entries using YAML files. It provides a command-line interface for adding and removing DNS entries.
 
-[dynamic_dns.py](2_ansible_config/dynamic_dns.py)
+[dynamic_dns.py](../2_ansible_config/dynamic_dns.py)
 ## Installation
 * Clone the repository.
 * Install the required dependencies with pip install -r requirements.txt.
