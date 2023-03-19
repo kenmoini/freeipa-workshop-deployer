@@ -11,7 +11,7 @@
       
     - name: Add DNS records for each name
       ipadnsrecord:
-        ipaadmin_password: {{ freeipa_server_admin_password }}
+        ipaadmin_password: "{{ freeipa_server_admin_password }}"
         records:
           - name: "{{ item.key }}"
             zone_name: "{{ freeipa_server_domain }}"
