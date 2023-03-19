@@ -74,6 +74,5 @@ freeipa_server_install_options:
   - "--forwarder=8.8.8.8"
   - "--allow-zone-overlap"
   - "--ip-address={{ private_ip }}"
-  - "--ip-address={{ ansible_ssh_host }}"
   - "--auto-forwarders"
 freeipa_base_dn: "DC={{ freeipa_server_domain.split('.') | join(',DC=') }}"
