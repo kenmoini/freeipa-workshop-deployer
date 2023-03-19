@@ -14,7 +14,12 @@ else
 fi
 
 ## Include inventory if the file exists
-INVENTORY=.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
+if [ $INFRA_PROVIDER = "kcli" ]; then
+  INVENTORY=$HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
+else
+  INVENTORY=.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
+fi
+
 if [ -f "$INVENTORY" ]; then
     echo "Inventory found, proceeding..."
 else
