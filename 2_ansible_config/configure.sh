@@ -65,6 +65,10 @@ else
     deploy_idm.yaml
 fi
 
+echo "Login to the FreeIPA server the as admin user:"
+echo "USERNAME: admin"
+PASSWORD=$(yq eval '.freeipa_server_admin_password' 2_ansible_config/vars/main.yml)
+echo "PASSWORD: ${PASSWORD}"
 
 
 
