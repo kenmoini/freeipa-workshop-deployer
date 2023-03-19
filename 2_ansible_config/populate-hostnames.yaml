@@ -1,8 +1,7 @@
 ---
 - name: Set up RH Identity Management Server (freeipa-server)
-  hosts: idm
-  become: True
-  gather_facts: True
+  hosts: localhost
+  connection: local
 
   tasks:
 
