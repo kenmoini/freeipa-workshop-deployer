@@ -6,15 +6,26 @@
   tasks:
 
     - name: Include the base variables
-      include_vars: "vars/main.yml"
+      ansible.builtin.include_vars: "vars/main.yml"
+    - name: Debug names and hostvars
+      debug:
+        var: names
+
+    - name: Debug names and dns_clients
+      debug:
+        var: dns_clients
+
+    - name: Ensure that dns record is Added
+      community.general.ipa_dnsrecord:
+        name: "{{ item.key }}"
+        zone_name:  "{{ freeipa_server_domain }}"
+        record_type: 'A'
+        record_value:  "{{ item.value }}"
+        ipa_host: "{{ freeipa_server_fqdn }}"
+        ipa_user: admin
+        ipa_pass:  "{{ freeipa_server_admin_password }}"
+        state: present
+        validate_certs: false
+      loop: "{{ dns_clients|dict2items }}"
+      when: item.key in names
       
-    - name: Add DNS records for each name
-      ipadnsrecord:
-        ipaadmin_password: "{{ freeipa_server_admin_password }}"
-        records:
-          - name: "{{ item.key }}"
-            zone_name: "{{ freeipa_server_domain }}"
-            record_type: A
-            record_value:
-              - "{{ item.value }}"
-      loop: "{{ names }}"

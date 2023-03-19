@@ -71,16 +71,17 @@ freeipa_server_install_options:
 #  - "--ssh-trust-dns"
 #  - "--no-dns"
   - "--setup-dns"
-  - "--forwarder=8.8.8.8"
+  - "--forwarder={{ dns_forwarder }}"
   - "--allow-zone-overlap"
   - "--ip-address={{ private_ip }}"
   - "--auto-forwarders"
 freeipa_base_dn: "DC={{ freeipa_server_domain.split('.') | join(',DC=') }}"
+# Hostnames to update DNS records for
 names:
-  - host01
-  - host02
-  - host03
-hostvars:
-  host01: 192.168.1.112
-  host02: 192.168.1.122
-  host03: 192.168.1.132
+  - example_host
+
+# Dictionary of IP addresses for each host
+dns_clients:
+  example_host: 192.168.1.112
+
+

@@ -58,3 +58,8 @@ spec:
       name: WorkshopLDAP
       type: LDAP
 ```
+
+## DNS Management 
+
+* [Dynamic DNS Script](docs/dns_profiles.md) used to create DNS entries for different profiles, such as OpenShift or Ansible Automation Platform.  
+* [Dynamic DNS](docs/dynamic_dns.md) is a Python script for managing DNS entries using YAML files. It provides a command-line interface for adding and removing DNS entries.
