@@ -6,7 +6,7 @@ idm_provision_users_group: workshopusers
 idm_provision_users_prefix: student
 idm_provision_users_suffix:
 idm_provision_users_start: 0
-idm_provision_users_count: 50
+idm_provision_users_count: 1
 idm_provision_users_password: r3dh4t1!
 
 freeipa_server_admin_password: s3cur3P455W0rd
@@ -65,15 +65,15 @@ freeipa_server_install_options:
   - "--mkhomedir"
   - "--hostname={{ freeipa_server_fqdn | default(ansible_fqdn) }}"
   - "--no-ntp"
-  - "--forwarder={{ dns_forwarder }}"
 #  - "--ip-address={{ freeipa_server_ip }}"
 #  - "--no-host-dns"
 #  - "--idstart=5000"
 #  - "--ssh-trust-dns"
 #  - "--no-dns"
-#  - "--setup-dns"
-#  - "--allow-zone-overlap"
-#  - "--ip-address={{ private_ip }}"
-#  - "--ip-address={{ ansible_ssh_host }}"
-#  - "--auto-forwarders"
+  - "--setup-dns"
+  - "--forwarder=8.8.8.8"
+  - "--allow-zone-overlap"
+  - "--ip-address={{ private_ip }}"
+  - "--ip-address={{ ansible_ssh_host }}"
+  - "--auto-forwarders"
 freeipa_base_dn: "DC={{ freeipa_server_domain.split('.') | join(',DC=') }}"
