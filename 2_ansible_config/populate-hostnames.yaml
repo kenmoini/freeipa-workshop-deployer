@@ -1,0 +1,21 @@
+---
+- name: Set up RH Identity Management Server (freeipa-server)
+  hosts: idm
+  become: True
+  gather_facts: True
+
+  tasks:
+
+    - name: Include the base variables
+      include_vars: "vars/main.yml"
+      
+    - name: Add DNS records for each name
+      ipadnsrecord:
+        ipaadmin_password: {{ freeipa_server_admin_password }}
+        records:
+          - name: "{{ item.key }}"
+            zone_name: "{{ freeipa_server_domain }}"
+            record_type: A
+            record_value:
+              - "{{ item.value }}"
+      loop: "{{ names }}"
