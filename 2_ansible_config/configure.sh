@@ -16,7 +16,7 @@ fi
 ## Include inventory if the file exists
 if [ $INFRA_PROVIDER = "kcli" ]; then
   INVENTORY=$HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
-  ansible-galaxy install --force -r "2_ansible_config/collections/requirements.yml" 
+  ansible-galaxy install --force -r "2_ansible_config/collections/requirements.yaml" 
 else
   INVENTORY=.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
 fi
