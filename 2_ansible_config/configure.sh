@@ -53,6 +53,7 @@ checkForProgramAndExit ansible-playbook
 if [ $INFRA_PROVIDER = "kcli" ]; then
   sudo ansible-playbook -i  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory \
   --extra-vars "idm_hostname=${IDM_HOSTNAME}" \
+  --extra-vars "private_ip=${PRIVATE_IP}" \
   --extra-vars "domain=${DOMAIN}" \
   --extra-vars "dns_forwarder=${DNS_FORWARDER}" \
   2_ansible_config/deploy_idm.yaml
