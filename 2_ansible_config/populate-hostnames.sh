@@ -53,7 +53,7 @@ checkForProgramAndExit ansible-playbook
 ## Include inventory if the file exists
 if [ $INFRA_PROVIDER = "kcli" ]; then
     sudo ansible-playbook -i  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory \
-        populate-hostnames.yaml
+        2_ansible_config/populate-hostnames.yaml
 else
     ansible-playbook -i .generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory \
         populate-hostnames.yaml
