@@ -47,13 +47,13 @@ checkForProgramAndExit jq
 checkForProgramAndExit kcli
 checkForProgramAndExit ansiblesafe
 
-if [ -d /opt/qubinode-installer/kcli-plan-samples ]; then
+if [ -d ${KCLI_PLANS_PATH} ]; then
   echo "kcli-plan-samples already exists"
 else
   exit 1
 fi
 
-cd /opt/qubinode-installer/kcli-plan-samples
+cd ${KCLI_PLANS_PATH}
 ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 2
 PASSWORD=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
 sudo python3 profile_generator/profile_generator.py update_yaml freeipa freeipa/template.yaml --image CentOS-Stream-GenericCloud-8-20220913.0.x86_64.qcow2 --user $USER --user-password ${PASSWORD} 
@@ -88,4 +88,4 @@ EOF
 
 sudo mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
 
-sudo sed -i  "s/freeipa/${IP_ADDRESS}/g" /opt/qubinode-installer/freeipa-workshop-deployer/vars.sh
+sudo sed -i  "s/freeipa/${IP_ADDRESS}/g" ${FREEIPA_REPO_LOC}/vars.sh
