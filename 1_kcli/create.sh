@@ -88,4 +88,4 @@ EOF
 
 sudo mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
 
-sudo sed -i  "s/freeipa/${IP_ADDRESS}/g" vars.sh
+sudo sed -i  "s/freeipa/${IP_ADDRESS}/g" /opt/qubinode-installer/freeipa-workshop-deployer/vars.sh
