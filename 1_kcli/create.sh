@@ -88,4 +88,4 @@ EOF
 
 sudo mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
 
-sed -i "s/freeipa/${IP_ADDRESS}/g" var.sh
+sed -i "s/freeipa/${IP_ADDRESS}/g" vars.sh
