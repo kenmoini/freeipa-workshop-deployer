@@ -68,7 +68,7 @@ else
 fi
 
 echo "Login to the FreeIPA server the as admin user:"
-echo "https://${IDM_HOSTNAME}.${DOMAIN"
+echo "https://${IDM_HOSTNAME}.${DOMAIN}"
 echo "${PRIVATE_IP}"
 echo "USERNAME: admin"
 PASSWORD=$(yq eval '.freeipa_server_admin_password' 2_ansible_config/vars/main.yml)
