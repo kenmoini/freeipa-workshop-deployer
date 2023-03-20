@@ -22,3 +22,4 @@ domain ${DOMAIN}
 nameserver ${DNS_FORWARDER}
 EOF
 sudo mv /tmp/resolv.conf /etc/resolv.conf
+sudo sed -i '/idm/d' /etc/hosts
