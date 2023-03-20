@@ -26,8 +26,8 @@ export ANSIBLE_VAULT_FILE="$HOME/quibinode_navigator/inventories/localhost/group
 KCLI_CONFIG_DIR="${HOME}/.kcli"
 KCLI_CONFIG_FILE="${KCLI_CONFIG_DIR}/profiles.yml"
 PROFILES_FILE="kcli-profiles.yml"
-KCLI_PLANS_PATH=/opt/quibinode_navigator/kcli-plan-samples
-FREEIPA_REPO_LOC=/opt/quibinode_navigator/freeipa-workshop-deployer
+KCLI_PLANS_PATH=/opt/kcli-plan-samples
+FREEIPA_REPO_LOC=/opt/freeipa-workshop-deployer
 
 
 ### DO NOT EDIT PAST THIS LINE
