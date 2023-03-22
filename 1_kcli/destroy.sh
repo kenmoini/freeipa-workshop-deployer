@@ -1,6 +1,11 @@
 #!/bin/bash
 
 ## set -x	## Uncomment for debugging
+if [ "$EUID" -ne 0 ]
+then 
+  export USE_SUDO="sudo"
+fi
+
 
 ## Include vars if the file exists
 FILE=vars.sh
@@ -12,8 +17,8 @@ else
 fi
 
 echo "Destroying the infrastructure..."
-echo "sudo kcli delete vm freeipa"
-sudo kcli delete vm freeipa
+echo "${USE_SUDO} kcli delete vm freeipa"
+${USE_SUDO} kcli delete vm freeipa
 
 rm -rf ../.generated/
 cat >/tmp/resolv.conf<<EOF
@@ -21,5 +26,5 @@ search ${DOMAIN}
 domain ${DOMAIN}
 nameserver ${DNS_FORWARDER}
 EOF
-sudo mv /tmp/resolv.conf /etc/resolv.conf
-sudo sed -i '/idm/d' /etc/hosts
+${USE_SUDO} mv /tmp/resolv.conf /etc/resolv.conf
+${USE_SUDO} sed -i '/${IDM_HOSTNAME}.${DOMAIN}/d' /etc/hosts
