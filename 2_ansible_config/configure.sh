@@ -2,7 +2,13 @@
 
 ## set -x	## Uncomment for debugging
 
-sudo pwd
+if [ "$EUID" -ne 0 ]
+then 
+  export USE_SUDO="sudo"
+fi
+
+
+${USE_SUDO} pwd
 
 ## Include vars if the file exists
 FILE=vars.sh
@@ -17,9 +23,9 @@ fi
 if [ $INFRA_PROVIDER = "kcli" ]; then
   INVENTORY=$HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
   ansible-galaxy install --force -r "2_ansible_config/collections/requirements.yaml" 
-  sudo ansible-galaxy install --force -r "2_ansible_config/collections/requirements.yaml"
+  ${USE_SUDO} ansible-galaxy install --force -r "2_ansible_config/collections/requirements.yaml"
   ansible-galaxy collection install freeipa.ansible_freeipa
-  sudo ansible-galaxy collection install freeipa.ansible_freeipa
+  ${USE_SUDO} ansible-galaxy collection install freeipa.ansible_freeipa
 else
   INVENTORY=.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
 fi
@@ -53,7 +59,7 @@ function checkForProgramAndExit() {
 checkForProgramAndExit ansible-playbook
 
 if [ $INFRA_PROVIDER = "kcli" ]; then
-  sudo ansible-playbook -i  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory \
+  ${USE_SUDO} ansible-playbook -i  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory \
   --extra-vars "idm_hostname=${IDM_HOSTNAME}" \
   --extra-vars "private_ip=${PRIVATE_IP}" \
   --extra-vars "domain=${DOMAIN}" \

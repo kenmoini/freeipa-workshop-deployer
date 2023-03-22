@@ -2,7 +2,12 @@
 
 ## set -x	## Uncomment for debugging
 
-sudo pwd
+if [ "$EUID" -ne 0 ]
+then 
+  export USE_SUDO="sudo"
+fi
+
+${USE_SUDO} pwd
 
 ## Include vars if the file exists
 FILE=vars.sh
@@ -56,21 +61,21 @@ fi
 cd ${KCLI_PLANS_PATH}
 ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 2
 PASSWORD=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
-sudo python3 profile_generator/profile_generator.py update_yaml freeipa freeipa/template.yaml --image CentOS-Stream-GenericCloud-8-20220913.0.x86_64.qcow2 --user cloud-user --user-password ${PASSWORD} --net-name ${KCLI_NETWORK}
+${USE_SUDO} python3 profile_generator/profile_generator.py update_yaml freeipa freeipa/template.yaml --image CentOS-Stream-GenericCloud-8-20220913.0.x86_64.qcow2 --user cloud-user --user-password ${PASSWORD} --net-name ${KCLI_NETWORK}
 cat  kcli-profiles.yml
 sleep 10s
 cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
-sudo cp kcli-profiles.yml /root/.kcli/profiles.yml
-sudo kcli create vm -p freeipa freeipa -w
-IP_ADDRESS=$(sudo kcli info vm freeipa | grep ip: | awk '{print $2}')
+${USE_SUDO} cp kcli-profiles.yml /root/.kcli/profiles.yml
+${USE_SUDO} kcli create vm -p freeipa freeipa -w
+IP_ADDRESS=$(${USE_SUDO} kcli info vm freeipa | grep ip: | awk '{print $2}')
 echo "IP Address: ${IP_ADDRESS}"
-echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | sudo tee -a /etc/hosts
+echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | ${USE_SUDO} tee -a /etc/hosts
 ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 1
 
 if [ -d $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN} ]; then
   echo "generated directory already exists"
 else
-  sudo mkdir -p  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}
+  ${USE_SUDO} mkdir -p  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}
 fi
 
 cat >/tmp/inventory<<EOF
@@ -86,6 +91,6 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_internal_private_ip=${IP_ADDRESS}
 EOF
 
-sudo mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
+${USE_SUDO} mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
 
-sudo sed -i  "s/freeipa/${IP_ADDRESS}/g" ${FREEIPA_REPO_LOC}/vars.sh
+${USE_SUDO} sed -i  "s/freeipa/${IP_ADDRESS}/g" ${FREEIPA_REPO_LOC}/vars.sh
