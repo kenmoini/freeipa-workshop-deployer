@@ -70,6 +70,7 @@ ${USE_SUDO} kcli create vm -p freeipa freeipa -w
 IP_ADDRESS=$(${USE_SUDO} kcli info vm freeipa | grep ip: | awk '{print $2}')
 echo "IP Address: ${IP_ADDRESS}"
 echo "${IP_ADDRESS} ${IDM_HOSTNAME}.${DOMAIN}" | ${USE_SUDO} tee -a /etc/hosts
+echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | ${USE_SUDO} tee -a /etc/hosts
 ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 1
 
 if [ -d $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN} ]; then
