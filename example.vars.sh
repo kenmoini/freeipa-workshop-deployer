@@ -22,7 +22,7 @@ DO_NODE_SIZE="s-1vcpu-2gb"
 
 ### KCLI variables
 export ANSIBLE_SAFE_VERSION="0.0.4"
-export ANSIBLE_VAULT_FILE="$HOME/quibinode_navigator/inventories/localhost/group_vars/control/vault.yml"
+export ANSIBLE_VAULT_FILE="$HOME/qubinode_navigator/inventories/localhost/group_vars/control/vault.yml"
 KCLI_CONFIG_DIR="${HOME}/.kcli"
 KCLI_CONFIG_FILE="${KCLI_CONFIG_DIR}/profiles.yml"
 PROFILES_FILE="kcli-profiles.yml"
