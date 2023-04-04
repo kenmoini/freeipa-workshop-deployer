@@ -21,7 +21,7 @@ fi
 
 if [ -f ${HOME}/qubinode_navigator/ansible_vault_setup.sh ];
 then
-    ./${HOME}/qubinode_navigator/ansible_vault_setup.sh
+    ~/qubinode_navigator/ansible_vault_setup.sh
 else
   echo "No ansible_vault_setup.sh file found!"        
   if [ -f ansible_vault_setup.sh  ];
