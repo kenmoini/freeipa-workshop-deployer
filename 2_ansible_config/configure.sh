@@ -19,6 +19,21 @@ else
     exit 1
 fi
 
+if [ -f ${HOME}/qubinode_navigator/ansible_vault_setup.sh ];
+then
+    ./${HOME}/qubinode_navigator/ansible_vault_setup.sh
+else
+  echo "No ansible_vault_setup.sh file found!"        
+  if [ -f ansible_vault_setup.sh  ];
+  then
+    ./ansible_vault_setup.sh
+  else
+    curl -OL https://gist.githubusercontent.com/tosin2013/022841d90216df8617244ab6d6aceaf8/raw/92400b9e459351d204feb67b985c08df6477d7fa/ansible_vault_setup.sh
+    chmod +x ansible_vault_setup.sh
+    ./ansible_vault_setup.sh
+  fi
+fi
+
 ## Include inventory if the file exists
 if [ $INFRA_PROVIDER = "kcli" ]; then
   INVENTORY=$HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/inventory
