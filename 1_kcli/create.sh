@@ -1,6 +1,6 @@
 #!/bin/bash
-
-## set -x	## Uncomment for debugging
+export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+set -xe	## Uncomment for debugging
 
 if [ "$EUID" -ne 0 ]
 then 
