@@ -7,6 +7,10 @@ then
   export USE_SUDO="sudo"
 fi
 
+if [ ! -z "$CICD_PIPELINE" ]; then
+  export USE_SUDO="sudo"
+fi
+
 ${USE_SUDO} pwd
 
 ## Include vars if the file exists
