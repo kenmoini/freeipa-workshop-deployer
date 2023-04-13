@@ -1,9 +1,13 @@
 #!/bin/bash
-
-## set -x	## Uncomment for debugging
+export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+set -xe	## Uncomment for debugging
 
 if [ "$EUID" -ne 0 ]
 then 
+  export USE_SUDO="sudo"
+fi
+
+if [ ! -z "$CICD_PIPELINE" ]; then
   export USE_SUDO="sudo"
 fi
 
@@ -64,7 +68,7 @@ PASSWORD=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
 ${USE_SUDO} python3 profile_generator/profile_generator.py update_yaml freeipa freeipa/template.yaml --image CentOS-Stream-GenericCloud-8-20220913.0.x86_64.qcow2 --user cloud-user --user-password ${PASSWORD} --net-name ${KCLI_NETWORK}
 cat  kcli-profiles.yml
 sleep 10s
-cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
+${USE_SUDO} cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
 ${USE_SUDO} cp kcli-profiles.yml /root/.kcli/profiles.yml
 ${USE_SUDO} kcli create vm -p freeipa freeipa -w
 IP_ADDRESS=$(${USE_SUDO} kcli info vm freeipa | grep ip: | awk '{print $2}')
