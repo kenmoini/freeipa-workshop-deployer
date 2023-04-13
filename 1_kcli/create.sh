@@ -1,6 +1,6 @@
 #!/bin/bash
 #export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
-set -xe	## Uncomment for debugging
+#set -xe	## Uncomment for debugging
 
 if [ "$EUID" -ne 0 ]
 then 
@@ -10,6 +10,14 @@ fi
 if [ ! -z "$CICD_PIPELINE" ]; then
   export USE_SUDO="sudo"
 fi
+
+if [ "$BASE_OS" == "ROCKY8" ]; then
+  source ~/.profile
+  export USE_SUDO="sudo"
+else 
+  checkForProgramAndExit ansiblesafe
+fi
+
 
 ${USE_SUDO} pwd
 
@@ -54,7 +62,6 @@ function checkForProgramAndExit() {
 checkForProgramAndExit wget
 checkForProgramAndExit jq
 checkForProgramAndExit kcli
-checkForProgramAndExit ansiblesafe
 
 if [ -d ${KCLI_PLANS_PATH} ]; then
   echo "kcli-plan-samples already exists"
@@ -70,8 +77,17 @@ cat  kcli-profiles.yml
 sleep 10s
 ${USE_SUDO} cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
 ${USE_SUDO} cp kcli-profiles.yml /root/.kcli/profiles.yml
-${USE_SUDO} kcli create vm -p freeipa freeipa -w
-IP_ADDRESS=$(${USE_SUDO} kcli info vm freeipa | grep ip: | awk '{print $2}')
+
+IN_INSTALLED=$(sudo kcli list vm | grep freeipa | awk '{print $2}')
+
+if [ -n "$IN_INSTALLED" ]; then
+    echo "FreeIPA is installed on VM $IN_INSTALLED"
+else
+    echo "FreeIPA is not installed"
+    ${USE_SUDO} /usr/bin/kcli create vm -p freeipa freeipa -w
+fi
+
+IP_ADDRESS=$(${USE_SUDO} /usr/bin/kcli info vm freeipa | grep ip: | awk '{print $2}')
 echo "IP Address: ${IP_ADDRESS}"
 echo "${IP_ADDRESS} ${IDM_HOSTNAME}.${DOMAIN}" | ${USE_SUDO} tee -a /etc/hosts
 echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | ${USE_SUDO} tee -a /etc/hosts

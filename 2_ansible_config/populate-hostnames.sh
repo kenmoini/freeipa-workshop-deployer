@@ -6,6 +6,12 @@ then
   export USE_SUDO="sudo"
 fi
 
+if [ "$BASE_OS" == "ROCKY8" ]; then
+  source ~/.profile
+  export USE_SUDO="sudo"
+else 
+  checkForProgramAndExit ansiblesafe
+fi
 
 ${USE_SUDO} pwd
 
