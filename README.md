@@ -2,7 +2,7 @@
 
 This collection of content will utilize Terraform to provision the infrastructure needed to deploy a single FreeIPA/Red Hat Identity Management Server.  Currently it supports deploying to AWS and DigitalOcean, but other cloud providers are easy to adapt to by just creating a new set of Terraform files.
 
-Tested on CentOS/RHEL 8.3
+Tested on CentOS/RHEL 8.x
 
 ## Deploying
 
@@ -58,3 +58,8 @@ spec:
       name: WorkshopLDAP
       type: LDAP
 ```
+
+## DNS Management 
+
+* [Dynamic DNS Script](docs/dns_profiles.md) used to create DNS entries for different profiles, such as OpenShift or Ansible Automation Platform.  
+* [Dynamic DNS](docs/dynamic_dns.md) is a Python script for managing DNS entries using YAML files. It provides a command-line interface for adding and removing DNS entries.
