@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x	## Uncomment for debugging
+#set -x	## Uncomment for debugging
 
 ## Functions
 function checkForProgram() {
