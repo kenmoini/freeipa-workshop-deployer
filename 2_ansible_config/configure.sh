@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## set -x	## Uncomment for debugging
+set -x	## Uncomment for debugging
 
 ## Functions
 function checkForProgram() {
@@ -39,7 +39,7 @@ if [ "$BASE_OS" == "ROCKY8" ]; then
 else 
   checkForProgramAndExit ansiblesafe
   checkForProgramAndExit ansible-playbook
-  ANSIBLE_COMMAND="ansible"
+  ANSIBLE_COMMAND=" ansible-playbook"
   ANSIBLE_GALAXY="ansible-galaxy"
 fi
 
