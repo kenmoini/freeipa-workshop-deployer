@@ -72,8 +72,8 @@ fi
 cd ${KCLI_PLANS_PATH}
  /usr/local/bin/ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 2
 PASSWORD=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
-${USE_SUDO} python3 profile_generator/profile_generator.py update_yaml freeipa freeipa/template.yaml --image CentOS-Stream-GenericCloud-8-20230404.0.x86_64.qcow2 --user cloud-user --user-password ${PASSWORD} --net-name ${KCLI_NETWORK}
-cat  kcli-profiles.yml
+${USE_SUDO} python3 profile_generator/profile_generator.py update_yaml freeipa freeipa/template.yaml --image rhel8 --user cloud-user --user-password ${PASSWORD} --net-name ${KCLI_NETWORK}
+#cat  kcli-profiles.yml
 sleep 10s
 ${USE_SUDO} cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
 ${USE_SUDO} cp kcli-profiles.yml /root/.kcli/profiles.yml
