@@ -137,7 +137,7 @@ sudo tee /tmp/inventory <<EOF
 ${IDM_HOSTNAME}
 
 [all:vars]
-ansible_ssh_private_key_file=/home/${USER}/.ssh/id_rsa
+ansible_ssh_private_key_file=/root/.ssh/id_rsa
 ansible_ssh_user=cloud-user
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_internal_private_ip=${IP_ADDRESS}
@@ -148,5 +148,5 @@ ${USE_SUDO} mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
 
 ${USE_SUDO} sed -i  "s/PRIVATE_IP=.*/PRIVATE_IP=${IP_ADDRESS}/g" ${FREEIPA_REPO_LOC}/vars.sh
 
-${USE_SUDO} sshpass -p "$SSH_PASSWORD" ${USE_SUDO} ssh-copy-id -o StrictHostKeyChecking=no cloud-user@${IP_ADDRESS} || exit $?
+${USE_SUDO} sshpass -p "$SSH_PASSWORD" ${USE_SUDO} ssh-copy-id -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no cloud-user@${IP_ADDRESS} || exit $?
 
