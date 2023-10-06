@@ -21,7 +21,7 @@ DO_NODE_IMAGE="centos-8-x64"
 DO_NODE_SIZE="s-1vcpu-2gb"
 
 ### KCLI variables
-export ANSIBLE_SAFE_VERSION="0.0.5"
+export ANSIBLE_SAFE_VERSION="0.0.7"
 export INVENTORY=localhost
 export ANSIBLE_VAULT_FILE="$HOME/qubinode_navigator/inventories/$INVENTORY/group_vars/control/vault.yml"
 KCLI_CONFIG_DIR="${HOME}/.kcli"
