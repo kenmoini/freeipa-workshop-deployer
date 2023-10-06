@@ -8,13 +8,18 @@ fi
 
 
 ## Include vars if the file exists
+## Include vars if the file exists
 FILE=vars.sh
 if [ -f "$FILE" ]; then
     source vars.sh
+elif [ -f "/opt/freeipa-workshop-deployer/${FILE}" ]; then
+    source /opt/freeipa-workshop-deployer/${FILE}
 else
     echo "No variable file found!"
     exit 1
 fi
+
+
 
 echo "Destroying the infrastructure..."
 echo "${USE_SUDO} kcli delete vm freeipa"

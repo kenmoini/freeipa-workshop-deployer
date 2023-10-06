@@ -2,6 +2,26 @@
 #export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 #set -xe	## Uncomment for debugging
 
+
+## Functions
+function checkForProgram() {
+    command -v $1
+    if [[ $? -eq 0 ]]; then
+        printf '%-72s %-7s\n' $1 "PASSED!";
+    else
+        printf '%-72s %-7s\n' $1 "FAILED!";
+    fi
+}
+function checkForProgramAndExit() {
+    command -v $1
+    if [[ $? -eq 0 ]]; then
+        printf '%-72s %-7s\n' $1 "PASSED!";
+    else
+        printf '%-72s %-7s\n' $1 "FAILED!";
+        exit 1
+    fi
+}
+
 if [ "$EUID" -ne 0 ]
 then 
   export USE_SUDO="sudo"
@@ -32,24 +52,8 @@ else
     exit 1
 fi
 
-## Functions
-function checkForProgram() {
-    command -v $1
-    if [[ $? -eq 0 ]]; then
-        printf '%-72s %-7s\n' $1 "PASSED!";
-    else
-        printf '%-72s %-7s\n' $1 "FAILED!";
-    fi
-}
-function checkForProgramAndExit() {
-    command -v $1
-    if [[ $? -eq 0 ]]; then
-        printf '%-72s %-7s\n' $1 "PASSED!";
-    else
-        printf '%-72s %-7s\n' $1 "FAILED!";
-        exit 1
-    fi
-}
+
+
 
 # @description This function will set the variables for the installer
 # ANSIBLE_SAFE_VERSION - The version of the ansiblesafe binary
@@ -72,9 +76,32 @@ else
 fi
 
 cd ${KCLI_PLANS_PATH}
- /usr/local/bin/ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 2
-PASSWORD=$(yq eval '.admin_user_password' "${ANSIBLE_VAULT_FILE}")
-${USE_SUDO} python3 profile_generator/profile_generator.py update_yaml freeipa freeipa/template.yaml --image rhel8 --user cloud-user --user-password ${PASSWORD} --net-name ${KCLI_NETWORK}
+${USE_SUDO} /usr/local/bin/ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 2
+PASSWORD=$(${USE_SUDO} yq eval '.freeipa_server_admin_password' "${ANSIBLE_VAULT_FILE}")
+RHSM_ORG=$(${USE_SUDO} yq eval '.rhsm_org' "${ANSIBLE_VAULT_FILE}")
+RHSM_ACTIVATION_KEY=$(${USE_SUDO} yq eval '.rhsm_activationkey' "${ANSIBLE_VAULT_FILE}")
+PULL_SECRET=$(${USE_SUDO} yq eval '.openshift_pull_secret' "${ANSIBLE_VAULT_FILE}")
+VM_NAME=freeipa-$(echo $RANDOM | md5sum | head -c 5; echo;)
+IMAGE_NAME=rhel8
+DNS_FORWARDER=$(${USE_SUDO} yq eval '.dns_forwarder' "${ANSIBLE_ALL_VARIABLES}")
+DOMAIN=$(${USE_SUDO} yq eval '.domain' "${ANSIBLE_ALL_VARIABLES}")
+DISK_SIZE=50
+KCLI_USER=$(${USE_SUDO} yq eval '.admin_user' "${ANSIBLE_ALL_VARIABLES}")
+
+${USE_SUDO} tee /tmp/vm_vars.yaml <<EOF
+image: ${IMAGE_NAME}
+user: cloud-user
+user_password: ${PASSWORD}
+disk_size: ${DISK_SIZE} 
+numcpus: 4
+memory: 8184
+net_name: ${KCLI_NETWORK} 
+reservedns: ${DNS_FORWARDER}
+domainname: ${DOMAIN}
+rhnorg: ${RHSM_ORG}
+rhnactivationkey: ${RHSM_ACTIVATION_KEY} 
+EOF
+${USE_SUDO} python3 profile_generator/profile_generator.py update-yaml freeipa freeipa/template.yaml --vars-file /tmp/vm_vars.yaml
 #cat  kcli-profiles.yml
 sleep 10s
 ${USE_SUDO} cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
@@ -86,14 +113,14 @@ if [ -n "$IN_INSTALLED" ]; then
     echo "FreeIPA is installed on VM $IN_INSTALLED"
 else
     echo "FreeIPA is not installed"
-    ${USE_SUDO} /usr/bin/kcli create vm -p freeipa freeipa -w
+    ${USE_SUDO} /usr/bin/kcli create vm -p freeipa freeipa -w || exit $?
 fi
 
 IP_ADDRESS=$(${USE_SUDO} /usr/bin/kcli info vm freeipa | grep ip: | awk '{print $2}')
 echo "IP Address: ${IP_ADDRESS}"
 echo "${IP_ADDRESS} ${IDM_HOSTNAME}.${DOMAIN}" | ${USE_SUDO} tee -a /etc/hosts
 echo "${IP_ADDRESS} ${IDM_HOSTNAME}" | ${USE_SUDO} tee -a /etc/hosts
- /usr/local/bin/ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 1
+${USE_SUDO} /usr/local/bin/ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 1
 
 if [ -d $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN} ]; then
   echo "generated directory already exists"
@@ -101,7 +128,7 @@ else
   ${USE_SUDO} mkdir -p  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}
 fi
 
-cat >/tmp/inventory<<EOF
+sudo tee /tmp/inventory <<EOF
 ## Ansible Inventory template file used by Terraform to create an ./inventory file populated with the nodes it created
 
 [idm]
@@ -109,11 +136,13 @@ ${IDM_HOSTNAME}
 
 [all:vars]
 ansible_ssh_private_key_file=/root/.ssh/id_rsa
-ansible_ssh_user=centos
+ansible_ssh_user=${KCLI_USER}
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_internal_private_ip=${IP_ADDRESS}
 EOF
 
+
 ${USE_SUDO} mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
 
-${USE_SUDO} sed -i  "s/freeipa/${IP_ADDRESS}/g" ${FREEIPA_REPO_LOC}/vars.sh
+${USE_SUDO} sed -i  "s/PRIVATE_IP=.*/PRIVATE_IP=${IP_ADDRESS}/g" ${FREEIPA_REPO_LOC}/vars.sh
+
