@@ -78,6 +78,7 @@ fi
 cd ${KCLI_PLANS_PATH}
 ${USE_SUDO} /usr/local/bin/ansiblesafe -f "${ANSIBLE_VAULT_FILE}" -o 2
 PASSWORD=$(${USE_SUDO} yq eval '.freeipa_server_admin_password' "${ANSIBLE_VAULT_FILE}")
+SSH_PASSWORD=${PASSWORD}
 RHSM_ORG=$(${USE_SUDO} yq eval '.rhsm_org' "${ANSIBLE_VAULT_FILE}")
 RHSM_ACTIVATION_KEY=$(${USE_SUDO} yq eval '.rhsm_activationkey' "${ANSIBLE_VAULT_FILE}")
 PULL_SECRET=$(${USE_SUDO} yq eval '.openshift_pull_secret' "${ANSIBLE_VAULT_FILE}")
@@ -135,8 +136,8 @@ sudo tee /tmp/inventory <<EOF
 ${IDM_HOSTNAME}
 
 [all:vars]
-ansible_ssh_private_key_file=/root/.ssh/id_rsa
-ansible_ssh_user=${KCLI_USER}
+ansible_ssh_private_key_file=/home/${USER}/.ssh/id_rsa
+ansible_ssh_user=cloud-user
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_internal_private_ip=${IP_ADDRESS}
 EOF
@@ -145,4 +146,6 @@ EOF
 ${USE_SUDO} mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
 
 ${USE_SUDO} sed -i  "s/PRIVATE_IP=.*/PRIVATE_IP=${IP_ADDRESS}/g" ${FREEIPA_REPO_LOC}/vars.sh
+
+sshpass -p "$SSH_PASSWORD" ssh-copy-id -o StrictHostKeyChecking=no cloud-user@${IP_ADDRESS} || exit $?
 
