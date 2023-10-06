@@ -68,6 +68,7 @@ fi
 checkForProgramAndExit wget
 checkForProgramAndExit jq
 checkForProgramAndExit kcli
+checkForProgramAndExit sshpass
 
 if [ -d ${KCLI_PLANS_PATH} ]; then
   echo "kcli-plan-samples already exists"
