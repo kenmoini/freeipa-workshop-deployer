@@ -57,7 +57,7 @@ else
   checkForProgramAndExit ansiblesafe
   checkForProgramAndExit ansible-playbook
   ANSIBLE_COMMAND="/usr/local/bin/ansible-playbook"
-  ANSIBLE_GALAXY="ansible-galaxy"
+  ANSIBLE_GALAXY="/usr/local/bin/ansible-galaxy"
 fi
 
 ${USE_SUDO} pwd
