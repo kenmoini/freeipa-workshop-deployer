@@ -25,6 +25,8 @@ ${USE_SUDO} pwd
 FILE=vars.sh
 if [ -f "$FILE" ]; then
     source vars.sh
+elif [ -f "/opt/freeipa-workshop-deployer/${FILE}" ];
+    source /opt/freeipa-workshop-deployer/${FILE}
 else
     echo "No variable file found!"
     exit 1
