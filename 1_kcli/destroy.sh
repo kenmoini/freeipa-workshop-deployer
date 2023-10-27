@@ -23,7 +23,7 @@ fi
 
 echo "Destroying the infrastructure..."
 echo "${USE_SUDO} kcli delete vm freeipa"
-${USE_SUDO} kcli delete vm freeipa
+${USE_SUDO} kcli delete vm freeipa -y 
 
 rm -rf ../.generated/
 cat >/tmp/resolv.conf<<EOF
