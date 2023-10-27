@@ -147,6 +147,8 @@ EOF
 ${USE_SUDO} mv /tmp/inventory  $HOME/.generated/.${IDM_HOSTNAME}.${DOMAIN}/
 
 ${USE_SUDO} sed -i  "s/PRIVATE_IP=.*/PRIVATE_IP=${IP_ADDRESS}/g" ${FREEIPA_REPO_LOC}/vars.sh
+${USE_SUDO} sed -i  "s/DOMAIN=.*/DOMAIN=${DOMAIN}/g" ${FREEIPA_REPO_LOC}/vars.sh
+${USE_SUDO} sed -i  "s/DNS_FORWARDER=.*/DNS_FORWARDER=${DNS_FORWARDER}/g" ${FREEIPA_REPO_LOC}/vars.sh
 
 ${USE_SUDO} sshpass -p "$SSH_PASSWORD" ${USE_SUDO} ssh-copy-id -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no cloud-user@${IP_ADDRESS} || exit $?
 
