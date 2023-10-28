@@ -38,6 +38,14 @@ else
   checkForProgramAndExit ansiblesafe
 fi
 
+if [ !-f /var/lib/libvirt/images/rhel8 ];
+then
+  echo "RHEL8 image not found"
+  echo "Please Run  the following command to download the image"
+  echo "sudo kcli download image rhel8"
+  exit 1
+fi
+
 
 ${USE_SUDO} pwd
 
