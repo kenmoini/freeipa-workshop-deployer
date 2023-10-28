@@ -38,7 +38,7 @@ else
   checkForProgramAndExit ansiblesafe
 fi
 
-if [ !-f /var/lib/libvirt/images/rhel8 ];
+if [[ ! -f /var/lib/libvirt/images/rhel8 ]];
 then
   echo "RHEL8 image not found"
   echo "Please Run  the following command to download the image"
