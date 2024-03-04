@@ -111,7 +111,21 @@ domainname: ${DOMAIN}
 rhnorg: ${RHSM_ORG}
 rhnactivationkey: ${RHSM_ACTIVATION_KEY} 
 EOF
-${USE_SUDO} python3 profile_generator/profile_generator.py update-yaml freeipa freeipa/template.yaml --vars-file /tmp/vm_vars.yaml
+
+# if target server is null run target server is empty if target server is hetzner run hetzner else run default
+if [ -z "$TARGET_SERVER" ]; then
+  echo "TARGET_SERVER is empty"
+  ${USE_SUDO} python3 profile_generator/profile_generator.py update-yaml freeipa freeipa/template.yaml --vars-file /tmp/vm_vars.yaml
+elif [ "$TARGET_SERVER" == "hetzner" ]; then
+  echo "TARGET_SERVER is hetzner"
+  ${USE_SUDO} python3 profile_generator/profile_generator.py update_yaml freeipa freeipa/template.yaml --vars-file /tmp/vm_vars.yaml
+else
+  echo "TARGET_SERVER is ${TARGET_SERVER}"
+ ${USE_SUDO} python3 profile_generator/profile_generator.py update-yaml freeipa freeipa/template.yaml --vars-file /tmp/vm_vars.yaml
+fi
+
+
+
 #cat  kcli-profiles.yml
 sleep 10s
 ${USE_SUDO} cp kcli-profiles.yml ${KCLI_CONFIG_DIR}/profiles.yml
