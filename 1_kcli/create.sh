@@ -31,13 +31,6 @@ if [ ! -z "$CICD_PIPELINE" ]; then
   export USE_SUDO="sudo"
 fi
 
-if [ "$BASE_OS" == "ROCKY8" ]; then
-  source ~/.profile
-  export USE_SUDO="sudo"
-else 
-  checkForProgramAndExit ansiblesafe
-fi
-
 if [[ ! -f /var/lib/libvirt/images/rhel8 ]];
 then
   echo "RHEL8 image not found"
@@ -59,9 +52,6 @@ else
     echo "No variable file found!"
     exit 1
 fi
-
-
-
 
 # @description This function will set the variables for the installer
 # ANSIBLE_SAFE_VERSION - The version of the ansiblesafe binary

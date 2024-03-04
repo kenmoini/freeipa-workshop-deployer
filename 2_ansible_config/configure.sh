@@ -54,7 +54,6 @@ if [ "$BASE_OS" == "ROCKY8" ]; then
   ANSIBLE_COMMAND="/root/.local/bin/ansible-playbook"
   ANSIBLE_GALAXY="/root/.local/bin/ansible-galaxy"
 else 
-  checkForProgramAndExit ansiblesafe
   checkForProgramAndExit ansible-playbook
   ANSIBLE_COMMAND="/usr/local/bin/ansible-playbook"
   ANSIBLE_GALAXY="/usr/local/bin/ansible-galaxy"
