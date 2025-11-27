@@ -55,7 +55,19 @@
       yum:
         disable_gpg_check: yes
         state: present
-        name: ['nano', 'firewalld', 'python3-libselinux', '@idm:DL1']
+        name: ['nano', 'firewalld', 'python3-libselinux']
+
+    # Install FreeIPA packages directly (works on CentOS Stream 9 and RHEL 9)
+    # The @idm:DL1 module stream is only for RHEL 8
+    - name: Install FreeIPA server packages
+      become: yes
+      yum:
+        disable_gpg_check: yes
+        state: present
+        name:
+          - ipa-server
+          - ipa-server-dns
+          - ipa-server-common
 
     - name: Disable SELinux
       selinux:
