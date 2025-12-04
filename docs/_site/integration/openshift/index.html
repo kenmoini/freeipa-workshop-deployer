@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>OpenShift Integration | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="OpenShift Integration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/integration/openshift/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/integration/openshift/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="OpenShift Integration" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"OpenShift Integration","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/integration/openshift/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/style.css?v=dea3c18865ff122f69b9eba5b7b87ec812ed2d44">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- custom head content -->
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/custom.css">
+
+<!-- Icons -->
+<link rel="shortcut icon" type="image/x-icon" href="/freeipa-workshop-deployer/assets/img/favicon.ico">
+
+<!-- RSS -->
+<link type="application/atom+xml" rel="alternate" href="https://tosin2013.github.io/freeipa-workshop-deployer/feed.xml" title="FreeIPA Workshop Deployer" />
+
+<!-- SEO -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>OpenShift Integration | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="OpenShift Integration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/integration/openshift/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/integration/openshift/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="OpenShift Integration" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"OpenShift Integration","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/integration/openshift/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="https://tosin2013.github.io/freeipa-workshop-deployer/">FreeIPA Workshop Deployer</a></h1>
+
+        
+          <img src="/freeipa-workshop-deployer/assets/img/logo.png" alt="Logo" />
+        
+
+        <p>Documentation for automated FreeIPA deployment and configuration</p>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/freeipa-workshop-deployer/overview/">Overview</a></li>
+            <li><a href="/freeipa-workshop-deployer/architecture/">Architecture</a></li>
+            <li><a href="/freeipa-workshop-deployer/technical-setup/">Technical Setup</a></li>
+            <li><a href="/freeipa-workshop-deployer/deployment/">Deployment</a></li>
+            <li class="menu-section">Guides</li>
+            <li><a href="/freeipa-workshop-deployer/scripts/configuration/">Configuration</a></li>
+            <li><a href="/freeipa-workshop-deployer/scripts/validation/">Validation</a></li>
+            <li class="menu-section">Integration</li>
+            <li><a href="/freeipa-workshop-deployer/integration/openshift/">OpenShift</a></li>
+          </ul>
+        </nav>
+
+        
+        <p class="view"><a href="https://github.com/tosin2013/freeipa-workshop-deployer">View the Project on GitHub <small>tosin2013/freeipa-workshop-deployer</small></a></p>
+        
+
+        
+      </header>
+      <section>
+
+      <article class="page">
+    <h1>OpenShift Integration</h1>
+    <div class="content">
+        <h1 id="openshift-integration-with-freeipa">OpenShift Integration with FreeIPA</h1>
+
+<p>This guide explains how to integrate your OpenShift cluster with FreeIPA for authentication and user management.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>A running FreeIPA server</li>
+  <li>Access to OpenShift cluster with administrator privileges</li>
+  <li>FreeIPA CA certificate</li>
+</ul>
+
+<h2 id="setup-steps">Setup Steps</h2>
+
+<h3 id="1-obtain-the-ca-certificate">1. Obtain the CA Certificate</h3>
+
+<p>You can obtain the CA certificate in two ways:</p>
+
+<h4 id="option-1-from-the-file-system">Option 1: From the File System</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Copy from the FreeIPA server</span>
+scp root@idm.example.com:/etc/ipa/ca.crt ./
+</code></pre></div></div>
+
+<h4 id="option-2-from-the-web-console">Option 2: From the Web Console</h4>
+<ol>
+  <li>Navigate to the FreeIPA Web Console</li>
+  <li>Go to: <strong>Authentication &gt; Certificates</strong></li>
+  <li>Click on certificate “1”</li>
+  <li>Select <strong>Actions &gt; Download Certificate</strong></li>
+</ol>
+
+<h3 id="2-configure-oauth-identity-provider">2. Configure OAuth Identity Provider</h3>
+
+<p>Create a new OAuth configuration for your OpenShift cluster that integrates with FreeIPA’s LDAP.</p>
+
+<h4 id="required-settings">Required Settings</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>email</td>
+      <td>mail</td>
+      <td>Email attribute mapping</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>dn</td>
+      <td>Distinguished Name for unique identification</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>cn</td>
+      <td>Common Name for display</td>
+    </tr>
+    <tr>
+      <td>preferredUsername</td>
+      <td>uid</td>
+      <td>User ID for login</td>
+    </tr>
+    <tr>
+      <td>bindDN</td>
+      <td>uid=admin,cn=users,cn=accounts,dc=example,dc=com</td>
+      <td>LDAP bind account</td>
+    </tr>
+    <tr>
+      <td>bindPassword</td>
+      <td>(your password)</td>
+      <td>Authentication for bind account</td>
+    </tr>
+    <tr>
+      <td>ca</td>
+      <td>fromDownloadedFile</td>
+      <td>CA certificate from step 1</td>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>ldaps://idm.example.com:636/cn=users,cn=accounts,dc=example,dc=com?uid?sub?(uid=*)</td>
+      <td>LDAP connection URL</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="3-apply-the-configuration">3. Apply the Configuration</h3>
+
+<p>Apply the following YAML configuration to your OpenShift cluster:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">config.openshift.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">OAuth</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="na">release.openshift.io/create-only</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">cluster</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">identityProviders</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">ldap</span><span class="pi">:</span>
+        <span class="na">attributes</span><span class="pi">:</span>
+          <span class="na">email</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">mail</span>
+          <span class="na">id</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">dn</span>
+          <span class="na">name</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">cn</span>
+          <span class="na">preferredUsername</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">uid</span>
+        <span class="na">bindDN</span><span class="pi">:</span> <span class="s1">'</span><span class="s">uid=admin,cn=users,cn=accounts,dc=example,dc=com'</span>
+        <span class="na">bindPassword</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">ldap-bind-password</span>
+        <span class="na">ca</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">ldap-ca</span>
+        <span class="na">insecure</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">url</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+          <span class="s">ldaps://idm.example.com:636/cn=users,cn=accounts,dc=example,dc=com?uid?sub?(uid=*)</span>
+      <span class="na">mappingMethod</span><span class="pi">:</span> <span class="s">claim</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">WorkshopLDAP</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">LDAP</span>
+</code></pre></div></div>
+
+<p>Apply this configuration using:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oc apply <span class="nt">-f</span> oauth-config.yaml
+</code></pre></div></div>
+
+<h2 id="verification">Verification</h2>
+
+<ol>
+  <li>Log out of OpenShift console</li>
+  <li>Click “Log in with WorkshopLDAP” on the login page</li>
+  <li>Enter FreeIPA credentials</li>
+  <li>Verify successful authentication and correct user details</li>
+</ol>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="common-issues">Common Issues</h3>
+
+<ol>
+  <li><strong>Certificate Issues</strong>
+    <ul>
+      <li>Verify CA certificate is correctly copied</li>
+      <li>Check certificate permissions</li>
+      <li>Ensure certificate is properly configured in OAuth</li>
+    </ul>
+  </li>
+  <li><strong>LDAP Connection Issues</strong>
+    <ul>
+      <li>Verify LDAP URL is correct</li>
+      <li>Check firewall rules allow LDAPS (636)</li>
+      <li>Confirm bindDN has proper permissions</li>
+    </ul>
+  </li>
+  <li><strong>Authentication Failures</strong>
+    <ul>
+      <li>Verify user exists in FreeIPA</li>
+      <li>Check user has proper group memberships</li>
+      <li>Review OpenShift authentication logs</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="debug-commands">Debug Commands</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check OAuth configuration</span>
+oc get oauth cluster <span class="nt">-o</span> yaml
+
+<span class="c"># View authentication logs</span>
+oc logs deployment/oauth-openshift <span class="nt">-n</span> openshift-authentication
+
+<span class="c"># Test LDAP connection</span>
+ldapsearch <span class="nt">-H</span> ldaps://idm.example.com:636 <span class="nt">-D</span> <span class="s2">"uid=admin,cn=users,cn=accounts,dc=example,dc=com"</span> <span class="nt">-W</span> <span class="nt">-b</span> <span class="s2">"cn=users,cn=accounts,dc=example,dc=com"</span>
+</code></pre></div></div>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<ol>
+  <li>Always use LDAPS (never plain LDAP)</li>
+  <li>Keep the CA certificate secure</li>
+  <li>Use a service account for bindDN</li>
+  <li>Regularly rotate bindDN password</li>
+  <li>Implement proper RBAC in both FreeIPA and OpenShift</li>
+</ol>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<ol>
+  <li>Configure group synchronization</li>
+  <li>Set up role bindings for FreeIPA groups</li>
+  <li>Implement automated user provisioning</li>
+  <li>Set up monitoring for authentication issues</li>
+</ol>
+
+    </div>
+</article>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/tosin2013">tosin2013</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/freeipa-workshop-deployer/assets/js/scale.fix.js"></script>
+  </body>
+</html>

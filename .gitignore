@@ -1,4 +1,8 @@
 vars.sh
+vault.yml
+.vault_password
+kcli-plans/kcli-profiles.yml
+docs/vendor/
 .generated/
 .generated/*
 1_infra_*/.terraform/
@@ -7,3 +11,4 @@ vars.sh
 1_infra_*/terraform.tfstate*
 1_infra_*/.terraform*
 1_infra_*/terraform*
+

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Technical Setup | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Technical Setup" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/technical-setup/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/technical-setup/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Technical Setup" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Technical Setup","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/technical-setup/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/style.css?v=dea3c18865ff122f69b9eba5b7b87ec812ed2d44">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- custom head content -->
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/custom.css">
+
+<!-- Icons -->
+<link rel="shortcut icon" type="image/x-icon" href="/freeipa-workshop-deployer/assets/img/favicon.ico">
+
+<!-- RSS -->
+<link type="application/atom+xml" rel="alternate" href="https://tosin2013.github.io/freeipa-workshop-deployer/feed.xml" title="FreeIPA Workshop Deployer" />
+
+<!-- SEO -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Technical Setup | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Technical Setup" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/technical-setup/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/technical-setup/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Technical Setup" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Technical Setup","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/technical-setup/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="https://tosin2013.github.io/freeipa-workshop-deployer/">FreeIPA Workshop Deployer</a></h1>
+
+        
+          <img src="/freeipa-workshop-deployer/assets/img/logo.png" alt="Logo" />
+        
+
+        <p>Documentation for automated FreeIPA deployment and configuration</p>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/freeipa-workshop-deployer/overview/">Overview</a></li>
+            <li><a href="/freeipa-workshop-deployer/architecture/">Architecture</a></li>
+            <li><a href="/freeipa-workshop-deployer/technical-setup/">Technical Setup</a></li>
+            <li><a href="/freeipa-workshop-deployer/deployment/">Deployment</a></li>
+            <li class="menu-section">Guides</li>
+            <li><a href="/freeipa-workshop-deployer/scripts/configuration/">Configuration</a></li>
+            <li><a href="/freeipa-workshop-deployer/scripts/validation/">Validation</a></li>
+            <li class="menu-section">Integration</li>
+            <li><a href="/freeipa-workshop-deployer/integration/openshift/">OpenShift</a></li>
+          </ul>
+        </nav>
+
+        
+        <p class="view"><a href="https://github.com/tosin2013/freeipa-workshop-deployer">View the Project on GitHub <small>tosin2013/freeipa-workshop-deployer</small></a></p>
+        
+
+        
+      </header>
+      <section>
+
+      <article class="page">
+    <h1>Technical Setup</h1>
+    <div class="content">
+        <h1 id="technical-setup-guide">Technical Setup Guide</h1>
+
+<p>This guide covers the technologies, dependencies, and setup requirements for the FreeIPA Workshop Deployer.</p>
+
+<h2 id="system-requirements">System Requirements</h2>
+
+<ul>
+  <li><strong>Primary OS:</strong> RHEL 9.5</li>
+  <li><strong>Memory:</strong> Minimum 4GB RAM (8GB recommended)</li>
+  <li><strong>Storage:</strong> 20GB+ available storage</li>
+  <li><strong>Network:</strong> Internet connectivity required</li>
+</ul>
+
+<h2 id="required-software">Required Software</h2>
+
+<h3 id="system-packages">System Packages</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Core packages</span>
+git curl wget unzip python3 python3-pip firewalld ansible-core
+</code></pre></div></div>
+
+<h3 id="python-packages">Python Packages</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Python dependencies</span>
+pip3 <span class="nb">install </span>dnspython netaddr
+</code></pre></div></div>
+
+<h3 id="infrastructure-tools">Infrastructure Tools</h3>
+<ul>
+  <li>Terraform v0.13.4</li>
+  <li>AWS CLI (~3.0) or DigitalOcean CLI or kcli</li>
+</ul>
+
+<h2 id="provider-setup">Provider Setup</h2>
+
+<h3 id="aws-configuration">AWS Configuration</h3>
+<ul>
+  <li>AWS Access Key</li>
+  <li>AWS Secret Key</li>
+  <li>VPC configuration</li>
+  <li>Route53 DNS zone (if using AWS DNS)</li>
+</ul>
+
+<h3 id="digitalocean-configuration">DigitalOcean Configuration</h3>
+<ul>
+  <li>Personal Access Token</li>
+  <li>DNS zone configuration (if using DO DNS)</li>
+</ul>
+
+<h3 id="kcli-configuration">kcli Configuration</h3>
+<ul>
+  <li>Network configuration</li>
+  <li>Storage configuration</li>
+  <li>Required VM images</li>
+</ul>
+
+<h2 id="ansible-collections">Ansible Collections</h2>
+
+<p>Required collections:</p>
+<ul>
+  <li>ansible.posix</li>
+  <li>community.general</li>
+</ul>
+
+<p>Install collections:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy collection <span class="nb">install</span> <span class="nt">-r</span> requirements.yml
+</code></pre></div></div>
+
+<h2 id="network-requirements">Network Requirements</h2>
+
+<h3 id="required-ports">Required Ports</h3>
+<ul>
+  <li>22 (SSH)</li>
+  <li>53 (DNS)</li>
+  <li>80/443 (HTTP/HTTPS)</li>
+  <li>389/636 (LDAP/LDAPS)</li>
+  <li>88/464 (Kerberos)</li>
+  <li>123 (NTP)</li>
+</ul>
+
+<h2 id="technical-constraints">Technical Constraints</h2>
+
+<h3 id="operating-system">Operating System</h3>
+<ul>
+  <li>Primary support for RHEL 9.5</li>
+  <li>Other RHEL/CentOS versions not officially supported</li>
+  <li>SELinux must be properly configured</li>
+  <li>Firewall management through firewalld</li>
+</ul>
+
+<h3 id="access-requirements">Access Requirements</h3>
+<ul>
+  <li>Root/sudo access required</li>
+  <li>Internet connectivity needed</li>
+  <li>DNS delegation properly configured</li>
+</ul>
+
+<h3 id="security-considerations">Security Considerations</h3>
+<ul>
+  <li>Public-facing ports and services require security audit</li>
+  <li>Proper firewall rules must be configured</li>
+  <li>SSL certificates required for secure services</li>
+</ul>
+
+<h2 id="development-environment">Development Environment</h2>
+
+<h3 id="directory-structure">Directory Structure</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">infrastructure/</code>: Terraform configurations</li>
+  <li><code class="language-plaintext highlighter-rouge">ansible/</code>: Ansible playbooks and roles</li>
+  <li><code class="language-plaintext highlighter-rouge">scripts/</code>: Utility scripts and tools</li>
+  <li><code class="language-plaintext highlighter-rouge">docs/</code>: Project documentation</li>
+</ul>
+
+<h3 id="version-control">Version Control</h3>
+<ul>
+  <li>All infrastructure code version-controlled</li>
+  <li>Terraform state files managed separately</li>
+  <li>Configuration templates tracked in Git</li>
+</ul>
+
+<h3 id="testing-environment">Testing Environment</h3>
+<ul>
+  <li>Development environments use smaller instances</li>
+  <li>Test domains for development work</li>
+  <li>Debug logging enabled for troubleshooting</li>
+</ul>
+
+<h2 id="monitoring-and-management">Monitoring and Management</h2>
+
+<h3 id="logging">Logging</h3>
+<ul>
+  <li>System logs</li>
+  <li>Deployment logs</li>
+  <li>Service logs</li>
+  <li>Test execution logs</li>
+</ul>
+
+<h3 id="metrics">Metrics</h3>
+<ul>
+  <li>Deployment time tracking</li>
+  <li>Resource utilization monitoring</li>
+  <li>Service response times</li>
+  <li>DNS propagation monitoring</li>
+</ul>
+
+<h2 id="additional-resources">Additional Resources</h2>
+
+<ul>
+  <li><a href="/freeipa-workshop-deployer/dns_profiles.html">DNS Profiles Documentation</a></li>
+  <li><a href="/freeipa-workshop-deployer/dynamic_dns.html">Dynamic DNS Documentation</a></li>
+  <li><a href="/freeipa-workshop-deployer/testing.html">Testing Documentation</a></li>
+</ul>
+
+    </div>
+</article>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/tosin2013">tosin2013</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/freeipa-workshop-deployer/assets/js/scale.fix.js"></script>
+  </body>
+</html>

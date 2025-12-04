@@ -55,7 +55,19 @@
       yum:
         disable_gpg_check: yes
         state: present
-        name: ['nano', 'firewalld', 'python3-libselinux', '@idm:DL1']
+        name: ['nano', 'firewalld', 'python3-libselinux']
+
+    # Install FreeIPA packages directly (works on CentOS Stream 9 and RHEL 9)
+    # The @idm:DL1 module stream is only for RHEL 8
+    - name: Install FreeIPA server packages
+      become: yes
+      yum:
+        disable_gpg_check: yes
+        state: present
+        name:
+          - ipa-server
+          - ipa-server-dns
+          - ipa-server-common
 
     - name: Disable SELinux
       selinux:
@@ -209,6 +221,17 @@
     - name: Run initial LE setup
       shell: "/opt/freeipa-letsencrypt/renew-le.sh --first-time"
       when: enable_certbot
+
+    - name: update KVM host /etc/resolv.conf to point to the IdM server
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+      copy:
+        content: |
+          search {{ freeipa_server_domain }}
+          nameserver {{ freeipa_server_ip }}
+          nameserver {{ dns_forwarder }}
+        dest: /etc/resolv.conf
+      delegate_to: 127.0.0.1
 
   handlers:
     - name: restart ipa services

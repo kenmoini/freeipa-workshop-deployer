@@ -1,0 +1,1 @@
+Sitemap: https://tosin2013.github.io/freeipa-workshop-deployer/sitemap.xml

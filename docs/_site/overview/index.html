@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Overview | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Overview" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/overview/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/overview/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Overview" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Overview","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/overview/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/style.css?v=dea3c18865ff122f69b9eba5b7b87ec812ed2d44">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- custom head content -->
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/custom.css">
+
+<!-- Icons -->
+<link rel="shortcut icon" type="image/x-icon" href="/freeipa-workshop-deployer/assets/img/favicon.ico">
+
+<!-- RSS -->
+<link type="application/atom+xml" rel="alternate" href="https://tosin2013.github.io/freeipa-workshop-deployer/feed.xml" title="FreeIPA Workshop Deployer" />
+
+<!-- SEO -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Overview | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Overview" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/overview/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/overview/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Overview" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Overview","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/overview/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="https://tosin2013.github.io/freeipa-workshop-deployer/">FreeIPA Workshop Deployer</a></h1>
+
+        
+          <img src="/freeipa-workshop-deployer/assets/img/logo.png" alt="Logo" />
+        
+
+        <p>Documentation for automated FreeIPA deployment and configuration</p>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/freeipa-workshop-deployer/overview/">Overview</a></li>
+            <li><a href="/freeipa-workshop-deployer/architecture/">Architecture</a></li>
+            <li><a href="/freeipa-workshop-deployer/technical-setup/">Technical Setup</a></li>
+            <li><a href="/freeipa-workshop-deployer/deployment/">Deployment</a></li>
+            <li class="menu-section">Guides</li>
+            <li><a href="/freeipa-workshop-deployer/scripts/configuration/">Configuration</a></li>
+            <li><a href="/freeipa-workshop-deployer/scripts/validation/">Validation</a></li>
+            <li class="menu-section">Integration</li>
+            <li><a href="/freeipa-workshop-deployer/integration/openshift/">OpenShift</a></li>
+          </ul>
+        </nav>
+
+        
+        <p class="view"><a href="https://github.com/tosin2013/freeipa-workshop-deployer">View the Project on GitHub <small>tosin2013/freeipa-workshop-deployer</small></a></p>
+        
+
+        
+      </header>
+      <section>
+
+      <article class="page">
+    <h1>Overview</h1>
+    <div class="content">
+        <h1 id="freeipa-workshop-deployer">FreeIPA Workshop Deployer</h1>
+
+<p>This project provides a comprehensive deployment and configuration solution for FreeIPA (Free Identity, Policy, and Audit) using Infrastructure as Code (IaC) principles. It leverages Terraform for infrastructure provisioning and Ansible for system configuration, ensuring a repeatable and automated deployment process.</p>
+
+<h2 id="why-this-project-exists">Why This Project Exists</h2>
+
+<p>This project aims to simplify and automate the deployment of FreeIPA environments while ensuring consistency and security across different deployment scenarios.</p>
+
+<h2 id="problems-solved">Problems Solved</h2>
+
+<ul>
+  <li><strong>Complexity in Manual Deployment:</strong> Automates the deployment process, reducing the complexity and potential for human error.</li>
+  <li><strong>Consistency Across Environments:</strong> Ensures consistent deployment across development, staging, and production environments.</li>
+  <li><strong>Scalability:</strong> Facilitates easy scaling of FreeIPA deployments to accommodate growing needs.</li>
+  <li><strong>Security:</strong> Provides a secure and compliant deployment process, adhering to best practices for identity management.</li>
+</ul>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<ol>
+  <li><strong>Infrastructure Provisioning</strong>
+    <ul>
+      <li>Uses Terraform to provision the necessary infrastructure on AWS, DigitalOcean, or kcli</li>
+      <li>Manages cloud resources and networking configurations</li>
+    </ul>
+  </li>
+  <li><strong>System Configuration</strong>
+    <ul>
+      <li>Employs Ansible to configure the FreeIPA server</li>
+      <li>Handles DNS setup, user provisioning, and certificate management</li>
+      <li>Ensures consistent system configuration across deployments</li>
+    </ul>
+  </li>
+  <li><strong>Dynamic DNS Management</strong>
+    <ul>
+      <li>Implements dynamic DNS management for flexible configuration</li>
+      <li>Supports various DNS providers and configurations</li>
+    </ul>
+  </li>
+  <li><strong>Testing and Validation</strong>
+    <ul>
+      <li>Provides comprehensive testing procedures</li>
+      <li>Ensures proper functionality of all components</li>
+      <li>Validates deployments against best practices</li>
+    </ul>
+  </li>
+  <li><strong>Monitoring and Alerts</strong>
+    <ul>
+      <li>Sets up monitoring systems for operational visibility</li>
+      <li>Configures alerts for system health and performance</li>
+      <li>Enables proactive issue identification and resolution</li>
+    </ul>
+  </li>
+</ol>
+
+    </div>
+</article>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/tosin2013">tosin2013</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/freeipa-workshop-deployer/assets/js/scale.fix.js"></script>
+  </body>
+</html>

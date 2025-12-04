@@ -1,0 +1,57 @@
+title: FreeIPA Workshop Deployer
+description: Documentation for automated FreeIPA deployment and configuration
+baseurl: "/freeipa-workshop-deployer"
+url: "https://tosin2013.github.io"
+repository: tosin2013/freeipa-workshop-deployer
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-remote-theme
+
+# Theme settings
+logo: /assets/img/logo.svg
+show_downloads: false
+google_analytics: # Optional
+
+# Collections
+collections:
+  guide:
+    output: true
+    permalink: /:collection/:path/
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+# Default layouts
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: "_guide"
+    values:
+      layout: page
+  - scope:
+      path: "_docs"
+    values:
+      layout: page
+
+# Navigation
+header_pages:
+  - overview.md
+  - architecture.md
+  - technical-setup.md
+  - deployment.md
+  - blog.md
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

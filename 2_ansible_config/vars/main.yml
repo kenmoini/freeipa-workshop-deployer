@@ -6,7 +6,7 @@ idm_provision_users_group: workshopusers
 idm_provision_users_prefix: student
 idm_provision_users_suffix:
 idm_provision_users_start: 0
-idm_provision_users_count: 50
+idm_provision_users_count: 1
 idm_provision_users_password: r3dh4t1!
 
 freeipa_server_admin_password: s3cur3P455W0rd
@@ -15,6 +15,7 @@ freeipa_server_ds_password: s3cur3P455W0rd
 freeipa_server_domain: "{{ domain }}"
 freeipa_server_fqdn: "{{ idm_hostname }}.{{ domain }}"
 freeipa_server_ip: "{{ ansible_ssh_host }}"
+dns_forwarder:  "{{ dns_forwarder }}"
 freeipa_server_realm: "{{ domain | upper }}"
 freeipa_server_manage_host: false
 freeipa_server_install_base_command: ipa-server-install --unattended
@@ -22,14 +23,12 @@ freeipa_server_pkgs:
   - bind
   - bind-dyndb-ldap
   - ipa-server
-  #- python2-devel
   - openldap-devel
   - platform-python-devel
   - ipa-server-common
   - ipa-server-dns
   - ipa-server-trust-ad
   - krb5-devel
-  - python36-devel
   - python3-ipapython
   - python3-six
   - python3-dns
@@ -40,16 +39,12 @@ freeipa_server_pkgs:
   - python3-decorator
   - python3-pyasn1
   - python3-jwcrypto
-  - python3-pyOpenSSL
   - python3-cryptography
-  - python3-pytest
   - python3-ldap
   - python3-argcomplete
-  - python3-argh
   - "@Development tools"
 freeipa_server_pip_pkgs:
   - custodia
-  - ipapython==4.8.7
   - jwcrypto
   - pyasn1-modules
   - pyopenssl
@@ -58,6 +53,10 @@ freeipa_server_pip_pkgs:
   - cryptography
   - pytest
   - argparse-manpage
+  - argh
+  - pyOpenSSL
+  - pytest
+  - ipapython
 freeipa_server_install_options:
   - "--realm={{ freeipa_server_realm }}"
   - "--domain={{ freeipa_server_domain }}"
@@ -71,10 +70,18 @@ freeipa_server_install_options:
 #  - "--idstart=5000"
 #  - "--ssh-trust-dns"
 #  - "--no-dns"
-#  - "--setup-dns"
-#  - "--forwarder=8.8.8.8"
-#  - "--allow-zone-overlap"
-#  - "--ip-address={{ private_ip }}"
-#  - "--ip-address={{ ansible_ssh_host }}"
-#  - "--auto-forwarders"
+  - "--setup-dns"
+  - "--forwarder={{ dns_forwarder }}"
+  - "--allow-zone-overlap"
+  - "--ip-address={{ private_ip }}"
+  - "--auto-forwarders"
 freeipa_base_dn: "DC={{ freeipa_server_domain.split('.') | join(',DC=') }}"
+# Hostnames to update DNS records for
+names:
+  - example_host
+
+# Dictionary of IP addresses for each host
+dns_clients:
+  example_host: 192.168.1.112
+
+

@@ -1,0 +1,31 @@
+  image: {{ image }}
+{% if rhnregister %}
+  rhnregister: true
+{% endif %}
+{% if rhnorg %}
+  rhnorg: {{ rhnorg }}
+{% endif %}
+{% if rhnactivationkey %}
+  rhnactivationkey: {{ rhnactivationkey }}
+{% endif %}
+  numcpus: {{ numcpus }}
+  memory: {{ memory }}
+  disks:
+    - size: {{ disk_size }}
+  {% if reservedns %}
+  reservedns: true
+  {% endif %}
+  nets:
+    - name: {{ net_name }}
+  dns: {{ reservedns }}
+  cmds:
+    - nmcli connection modify  "cloud-init eth0"  ipv4.dns {{ reservedns }}
+    - nmcli connection down "cloud-init eth0" && sudo nmcli connection up "cloud-init eth0"
+    - echo {{ user_password }} | passwd --stdin root
+    - useradd {{ user }}
+    - usermod -aG wheel {{ user }}
+    - echo "{{ user }} ALL=(root) NOPASSWD:ALL" | tee -a /etc/sudoers.d/{{ user }}
+    - echo {{ user_password }} | passwd --stdin {{ user }}
+    - subscription-manager refresh
+    - subscription-manager attach --auto
+    - dnf install git vim unzip wget tar python3 python3-pip util-linux-user tmux -y 

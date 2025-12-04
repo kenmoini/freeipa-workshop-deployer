@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Validation and Deployment Scripts | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Validation and Deployment Scripts" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/scripts/validation/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/scripts/validation/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Validation and Deployment Scripts" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Validation and Deployment Scripts","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/scripts/validation/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/style.css?v=dea3c18865ff122f69b9eba5b7b87ec812ed2d44">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- custom head content -->
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/custom.css">
+
+<!-- Icons -->
+<link rel="shortcut icon" type="image/x-icon" href="/freeipa-workshop-deployer/assets/img/favicon.ico">
+
+<!-- RSS -->
+<link type="application/atom+xml" rel="alternate" href="https://tosin2013.github.io/freeipa-workshop-deployer/feed.xml" title="FreeIPA Workshop Deployer" />
+
+<!-- SEO -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Validation and Deployment Scripts | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Validation and Deployment Scripts" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/scripts/validation/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/scripts/validation/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Validation and Deployment Scripts" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Validation and Deployment Scripts","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/scripts/validation/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="https://tosin2013.github.io/freeipa-workshop-deployer/">FreeIPA Workshop Deployer</a></h1>
+
+        
+          <img src="/freeipa-workshop-deployer/assets/img/logo.png" alt="Logo" />
+        
+
+        <p>Documentation for automated FreeIPA deployment and configuration</p>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/freeipa-workshop-deployer/overview/">Overview</a></li>
+            <li><a href="/freeipa-workshop-deployer/architecture/">Architecture</a></li>
+            <li><a href="/freeipa-workshop-deployer/technical-setup/">Technical Setup</a></li>
+            <li><a href="/freeipa-workshop-deployer/deployment/">Deployment</a></li>
+            <li class="menu-section">Guides</li>
+            <li><a href="/freeipa-workshop-deployer/scripts/configuration/">Configuration</a></li>
+            <li><a href="/freeipa-workshop-deployer/scripts/validation/">Validation</a></li>
+            <li class="menu-section">Integration</li>
+            <li><a href="/freeipa-workshop-deployer/integration/openshift/">OpenShift</a></li>
+          </ul>
+        </nav>
+
+        
+        <p class="view"><a href="https://github.com/tosin2013/freeipa-workshop-deployer">View the Project on GitHub <small>tosin2013/freeipa-workshop-deployer</small></a></p>
+        
+
+        
+      </header>
+      <section>
+
+      <article class="page">
+    <h1>Validation and Deployment Scripts</h1>
+    <div class="content">
+        <h1 id="validation-and-deployment-scripts">Validation and Deployment Scripts</h1>
+
+<h2 id="validatesh">validate.sh</h2>
+
+<p>The validation script performs comprehensive checks of your environment to ensure all requirements are met before deployment.</p>
+
+<h3 id="system-validation">System Validation</h3>
+
+<h4 id="operating-system-check">Operating System Check</h4>
+<ul>
+  <li>Verifies RHEL 9.5 installation</li>
+  <li>Checks RedHat release version</li>
+  <li>Validates OS compatibility</li>
+</ul>
+
+<h4 id="command-availability">Command Availability</h4>
+<p>Verifies the following commands are installed:</p>
+<ul>
+  <li>terraform</li>
+  <li>ansible</li>
+  <li>git</li>
+  <li>python3</li>
+  <li>pip3</li>
+</ul>
+
+<h4 id="package-validation">Package Validation</h4>
+<p>Checks for required system packages:</p>
+<ul>
+  <li>bind</li>
+  <li>bind-utils</li>
+  <li>firewalld</li>
+  <li>ansible-core</li>
+  <li>python3-pip</li>
+  <li>python3-devel</li>
+  <li>openssl-devel</li>
+  <li>gcc</li>
+</ul>
+
+<h4 id="python-package-validation">Python Package Validation</h4>
+<p>Verifies Python dependencies:</p>
+<ul>
+  <li>ansible-core</li>
+  <li>dnspython</li>
+  <li>netaddr</li>
+</ul>
+
+<h3 id="security-configuration">Security Configuration</h3>
+
+<h4 id="firewall-validation">Firewall Validation</h4>
+<ul>
+  <li>Checks if firewalld is running</li>
+  <li>Validates required services are enabled:
+    <ul>
+      <li>dns</li>
+      <li>freeipa-ldap</li>
+      <li>freeipa-ldaps</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="infrastructure-validation">Infrastructure Validation</h3>
+
+<h4 id="terraform-version-check">Terraform Version Check</h4>
+<ul>
+  <li>Verifies Terraform version &gt;= 0.13.4</li>
+  <li>Checks compatibility with infrastructure providers</li>
+</ul>
+
+<h4 id="configuration-files">Configuration Files</h4>
+<ul>
+  <li>Validates presence of vars.sh</li>
+  <li>Checks configuration file syntax</li>
+  <li>Verifies required variables are set</li>
+</ul>
+
+<h3 id="error-handling">Error Handling</h3>
+<ul>
+  <li>Maintains an error counter</li>
+  <li>Provides detailed error messages</li>
+  <li>Offers suggestions for fixing issues</li>
+  <li>Returns appropriate exit codes</li>
+</ul>
+
+<h2 id="total_deployersh">total_deployer.sh</h2>
+
+<p>The main deployment script that orchestrates the entire FreeIPA deployment process.</p>
+
+<h3 id="workflow-overview">Workflow Overview</h3>
+
+<ol>
+  <li><strong>Initialization</strong>
+    <ul>
+      <li>Sources configuration from vars.sh</li>
+      <li>Validates sudo access</li>
+      <li>Sets up error handling</li>
+    </ul>
+  </li>
+  <li><strong>Provider Selection</strong>
+Based on INFRA_PROVIDER variable:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">INFRA_PROVIDER</span><span class="o">=</span><span class="s2">"aws|digitalocean|kcli"</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Infrastructure Deployment</strong>
+    <ul>
+      <li>For AWS:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./1_infra_aws/create.sh
+</code></pre></div>        </div>
+      </li>
+      <li>For DigitalOcean:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./1_infra_digitalocean/create.sh
+</code></pre></div>        </div>
+      </li>
+      <li>For KCLI:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./1_kcli/create.sh
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Configuration</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./2_ansible_config/configure.sh
+</code></pre></div>    </div>
+    <ul>
+      <li>Runs Ansible playbooks</li>
+      <li>Configures FreeIPA</li>
+      <li>Sets up DNS</li>
+      <li>Configures certificates</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="provider-specific-deployments">Provider-Specific Deployments</h3>
+
+<h4 id="aws-deployment">AWS Deployment</h4>
+<ul>
+  <li>Creates VPC resources</li>
+  <li>Deploys EC2 instances</li>
+  <li>Configures security groups</li>
+  <li>Sets up Route53 DNS</li>
+</ul>
+
+<h4 id="digitalocean-deployment">DigitalOcean Deployment</h4>
+<ul>
+  <li>Creates Droplets</li>
+  <li>Configures networking</li>
+  <li>Sets up DNS records</li>
+  <li>Configures firewalls</li>
+</ul>
+
+<h4 id="kcli-deployment">KCLI Deployment</h4>
+<ul>
+  <li>Sets up local virtualization</li>
+  <li>Creates virtual machines</li>
+  <li>Configures networking</li>
+  <li>Sets up local DNS</li>
+</ul>
+
+<h3 id="error-handling-1">Error Handling</h3>
+<ul>
+  <li>Exit on error (set -e)</li>
+  <li>Provider-specific error handling</li>
+  <li>Ansible configuration error handling</li>
+  <li>Deployment validation checks</li>
+</ul>
+
+<h3 id="usage">Usage</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. First ensure vars.sh is configured:</span>
+<span class="nb">cp </span>example.vars.sh vars.sh
+vi vars.sh
+
+<span class="c"># 2. Run the validation script:</span>
+./validate.sh
+
+<span class="c"># 3. If validation passes, run the deployment:</span>
+./total_deployer.sh
+</code></pre></div></div>
+
+<h3 id="monitoring-deployment">Monitoring Deployment</h3>
+<ul>
+  <li>Check Ansible logs for configuration progress</li>
+  <li>Monitor provider-specific resources</li>
+  <li>Verify FreeIPA services are running</li>
+  <li>Test DNS resolution and LDAP connectivity</li>
+</ul>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+  <li>Check /var/log/messages for system errors</li>
+  <li>Review Ansible logs in /var/log/ansible.log</li>
+  <li>Verify provider-specific resource creation</li>
+  <li>Test network connectivity and DNS resolution</li>
+</ul>
+
+    </div>
+</article>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/tosin2013">tosin2013</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/freeipa-workshop-deployer/assets/js/scale.fix.js"></script>
+  </body>
+</html>

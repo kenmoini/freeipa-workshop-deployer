@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Deployment Guide | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Deployment Guide" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/deployment/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/deployment/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Deployment Guide" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Deployment Guide","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/deployment/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/style.css?v=dea3c18865ff122f69b9eba5b7b87ec812ed2d44">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- custom head content -->
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/custom.css">
+
+<!-- Icons -->
+<link rel="shortcut icon" type="image/x-icon" href="/freeipa-workshop-deployer/assets/img/favicon.ico">
+
+<!-- RSS -->
+<link type="application/atom+xml" rel="alternate" href="https://tosin2013.github.io/freeipa-workshop-deployer/feed.xml" title="FreeIPA Workshop Deployer" />
+
+<!-- SEO -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Deployment Guide | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Deployment Guide" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/deployment/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/deployment/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Deployment Guide" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Deployment Guide","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/deployment/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="https://tosin2013.github.io/freeipa-workshop-deployer/">FreeIPA Workshop Deployer</a></h1>
+
+        
+          <img src="/freeipa-workshop-deployer/assets/img/logo.png" alt="Logo" />
+        
+
+        <p>Documentation for automated FreeIPA deployment and configuration</p>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/freeipa-workshop-deployer/overview/">Overview</a></li>
+            <li><a href="/freeipa-workshop-deployer/architecture/">Architecture</a></li>
+            <li><a href="/freeipa-workshop-deployer/technical-setup/">Technical Setup</a></li>
+            <li><a href="/freeipa-workshop-deployer/deployment/">Deployment</a></li>
+            <li class="menu-section">Guides</li>
+            <li><a href="/freeipa-workshop-deployer/scripts/configuration/">Configuration</a></li>
+            <li><a href="/freeipa-workshop-deployer/scripts/validation/">Validation</a></li>
+            <li class="menu-section">Integration</li>
+            <li><a href="/freeipa-workshop-deployer/integration/openshift/">OpenShift</a></li>
+          </ul>
+        </nav>
+
+        
+        <p class="view"><a href="https://github.com/tosin2013/freeipa-workshop-deployer">View the Project on GitHub <small>tosin2013/freeipa-workshop-deployer</small></a></p>
+        
+
+        
+      </header>
+      <section>
+
+      <article class="page">
+    <h1>Deployment Guide</h1>
+    <div class="content">
+        <h1 id="deployment-guide">Deployment Guide</h1>
+
+<p>This guide covers both development and production deployment procedures for the FreeIPA Workshop Deployer.</p>
+
+<h2 id="development-deployment">Development Deployment</h2>
+
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+  <li>Development environment set up according to <a href="/freeipa-workshop-deployer/technical-setup/">Technical Setup</a></li>
+  <li>Access to chosen infrastructure provider (AWS/DigitalOcean/kcli)</li>
+  <li>Proper DNS configuration</li>
+</ul>
+
+<h3 id="steps">Steps</h3>
+
+<ol>
+  <li><strong>Bootstrap Environment</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./bootstrap.sh
+</code></pre></div>    </div>
+    <p>This sets up the development environment with required dependencies.</p>
+  </li>
+  <li><strong>Configure Variables</strong>
+    <ul>
+      <li>Copy example configuration:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>example.vars.sh vars.sh
+</code></pre></div>        </div>
+      </li>
+      <li>Edit <code class="language-plaintext highlighter-rouge">vars.sh</code> with your specific configuration</li>
+    </ul>
+  </li>
+  <li><strong>Validate Environment</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./validate.sh
+</code></pre></div>    </div>
+    <p>Ensures all prerequisites are met.</p>
+  </li>
+  <li><strong>Choose Provider</strong>
+Select your infrastructure provider:
+    <ul>
+      <li>AWS: Use <code class="language-plaintext highlighter-rouge">1_infra_aws/create.sh</code></li>
+      <li>DigitalOcean: Use <code class="language-plaintext highlighter-rouge">1_infra_digitalocean/create.sh</code></li>
+      <li>kcli: Use <code class="language-plaintext highlighter-rouge">1_kcli/create.sh</code></li>
+    </ul>
+  </li>
+  <li><strong>Deploy Infrastructure</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Example for AWS</span>
+<span class="nb">cd </span>1_infra_aws
+./create.sh
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Configure FreeIPA</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>2_ansible_config
+./configure.sh
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Verify Installation</strong>
+    <ul>
+      <li>Access FreeIPA web UI</li>
+      <li>Test user provisioning</li>
+      <li>Verify DNS configuration</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="development-notes">Development Notes</h3>
+<ul>
+  <li>Use smaller instance sizes for cost efficiency</li>
+  <li>Test domains recommended for development</li>
+  <li>Debug logging enabled by default</li>
+  <li>Consider using local kcli deployment for testing</li>
+</ul>
+
+<h2 id="production-deployment">Production Deployment</h2>
+
+<h3 id="prerequisites-1">Prerequisites</h3>
+<ul>
+  <li>RHEL 9.5 environment</li>
+  <li>Production-grade infrastructure access</li>
+  <li>DNS delegation configured</li>
+  <li>Security audit completed</li>
+</ul>
+
+<h3 id="steps-1">Steps</h3>
+
+<ol>
+  <li><strong>Environment Verification</strong>
+    <ul>
+      <li>Confirm RHEL 9.5 compatibility</li>
+      <li>Verify network requirements</li>
+      <li>Check DNS delegation</li>
+    </ul>
+  </li>
+  <li><strong>Production Configuration</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Configure with production settings</span>
+./bootstrap.sh <span class="nt">--production</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Infrastructure Setup</strong>
+    <ul>
+      <li>Configure production-grade instances
+        <ul>
+          <li>AWS: m5.xlarge recommended</li>
+          <li>Equivalent sizes for other providers</li>
+        </ul>
+      </li>
+      <li>Set up proper networking and security groups</li>
+    </ul>
+  </li>
+  <li><strong>DNS Configuration</strong>
+    <ul>
+      <li>Configure DNS delegation</li>
+      <li>Set up DNS profiles</li>
+      <li>Verify record propagation</li>
+    </ul>
+  </li>
+  <li><strong>High-Availability Setup</strong>
+    <ul>
+      <li>Deploy redundant servers</li>
+      <li>Configure load balancing</li>
+      <li>Set up replication</li>
+    </ul>
+  </li>
+  <li><strong>Security Configuration</strong>
+    <ul>
+      <li>Configure firewall rules</li>
+      <li>Set up SSL certificates</li>
+      <li>Implement security policies</li>
+    </ul>
+  </li>
+  <li><strong>Monitoring Setup</strong>
+    <ul>
+      <li>Configure system monitoring</li>
+      <li>Set up alerting</li>
+      <li>Enable performance metrics</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="production-notes">Production Notes</h3>
+<ul>
+  <li>Use production-grade instance sizes</li>
+  <li>Implement comprehensive backup strategy</li>
+  <li>Configure proper security measures</li>
+  <li>Set up monitoring and alerting</li>
+</ul>
+
+<h2 id="deployment-caveats">Deployment Caveats</h2>
+
+<h3 id="assumptions">Assumptions</h3>
+<ul>
+  <li>RHEL 9.5 is the primary supported platform</li>
+  <li>Root/sudo access is available</li>
+  <li>Internet connectivity for package installation</li>
+  <li>DNS delegation is properly configured</li>
+</ul>
+
+<h3 id="known-limitations">Known Limitations</h3>
+<ul>
+  <li>Other RHEL/CentOS versions not officially supported</li>
+  <li>Cloud provider quotas may affect deployment</li>
+  <li>DNS propagation may take time</li>
+  <li>Certificate provisioning requires public DNS resolution</li>
+</ul>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="common-issues">Common Issues</h3>
+<ol>
+  <li><strong>DNS Issues</strong>
+    <ul>
+      <li>Verify DNS delegation</li>
+      <li>Check record propagation</li>
+      <li>Validate DNS configuration</li>
+    </ul>
+  </li>
+  <li><strong>Connectivity Problems</strong>
+    <ul>
+      <li>Verify network configuration</li>
+      <li>Check security groups/firewall rules</li>
+      <li>Validate port accessibility</li>
+    </ul>
+  </li>
+  <li><strong>Certificate Issues</strong>
+    <ul>
+      <li>Verify DNS resolution</li>
+      <li>Check certificate configuration</li>
+      <li>Validate SSL setup</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="getting-help">Getting Help</h3>
+<ul>
+  <li>Check service logs</li>
+  <li>Review deployment logs</li>
+  <li>Consult documentation</li>
+  <li>Examine system metrics</li>
+</ul>
+
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+  <li><a href="/freeipa-workshop-deployer/dns_profiles.html">DNS Profiles Guide</a></li>
+  <li><a href="/freeipa-workshop-deployer/dynamic_dns.html">Dynamic DNS Setup</a></li>
+  <li><a href="/freeipa-workshop-deployer/testing.html">Testing Procedures</a></li>
+</ul>
+
+    </div>
+</article>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/tosin2013">tosin2013</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/freeipa-workshop-deployer/assets/js/scale.fix.js"></script>
+  </body>
+</html>

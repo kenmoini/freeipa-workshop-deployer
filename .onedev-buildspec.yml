@@ -1,0 +1,77 @@
+version: 30
+jobs:
+- name: Deploy FreeIPA on KVM
+  steps:
+  - !CommandStep
+    name: Clone freeipa-workshop-deployer
+    runInContainer: false
+    interpreter: !DefaultInterpreter
+      commands: "if [ ! -d /opt/freeipa-workshop-deployer ];\nthen \n  cd /opt/\n  git clone @param:GIT_REPO@\n  cd freeipa-workshop-deployer\nelse\n  cd /opt/freeipa-workshop-deployer\n  git config pull.rebase false\n  git pull\nfi\n"
+    useTTY: true
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !CommandStep
+    name: Configure Vars
+    runInContainer: false
+    interpreter: !DefaultInterpreter
+      commands: |
+        cd /opt/freeipa-workshop-deployer
+        cp example.vars.sh vars.sh
+        sed -i 's/INFRA_PROVIDER=.*/INFRA_PROVIDER="kcli"/' vars.sh
+        sed -i 's/INVENTORY=.*/INVENTORY='@param:INVENTORY@'/' vars.sh
+        sed -i 's/KCLI_NETWORK=.*/KCLI_NETWORK="'@param:KCLI_NETWORK@}'"/' vars.sh
+        sed -i 's/COMMUNITY_VERSION=.*/COMMUNITY_VERSION="'@param:COMMUNITY_VERSION@'"/' vars.sh
+        cat vars.sh
+    useTTY: true
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !CommandStep
+    name: Create/Destroy FreeIPA
+    runInContainer: false
+    interpreter: !DefaultInterpreter
+      commands: "# Check if the argument is \"create\" or \"destroy\"\nif [ \"@param:ACTION@\" == \"create\" ]; then\n    echo \"Creating...\"\n\texport COMMUNITY_VERSION=@param:COMMUNITY_VERSION@\n    /opt/freeipa-workshop-deployer/1_kcli/create.sh\n    /opt/freeipa-workshop-deployer/2_ansible_config/configure.sh\nelif [ \"@param:ACTION@\" == \"destroy\" ]; then\n    echo \"Destroying...\"\n   /opt/freeipa-workshop-deployer/1_kcli/destroy.sh\nelse\n    echo \"Invalid argument. Usage: $0 [create|destroy]\"\n    exit 1\nfi\n"
+    useTTY: true
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  paramSpecs:
+  - !TextParam
+    name: GIT_REPO
+    allowEmpty: false
+    multiline: false
+    defaultValueProvider: !SpecifiedDefaultValue
+      value: https://github.com/tosin2013/freeipa-workshop-deployer.git
+  - !TextParam
+    name: INVENTORY
+    allowEmpty: false
+    multiline: false
+    defaultValueProvider: !SpecifiedDefaultValue
+      value: hetzner
+  - !TextParam
+    name: KCLI_NETWORK
+    allowEmpty: false
+    multiline: false
+    defaultValueProvider: !SpecifiedDefaultValue
+      value: default
+  - !ChoiceParam
+    name: COMMUNITY_VERSION
+    allowMultiple: false
+    allowEmpty: false
+    choiceProvider: !SpecifiedChoices
+      choices:
+      - value: 'true'
+        color: '#0d87e9'
+      - value: 'false'
+        color: '#0d87e9'
+    defaultValueProvider: !SpecifiedDefaultValue
+      value: 'true'
+  - !ChoiceParam
+    name: ACTION
+    allowMultiple: false
+    allowEmpty: false
+    choiceProvider: !SpecifiedChoices
+      choices:
+      - value: create
+        color: '#0d87e9'
+      - value: destroy
+        color: '#0d87e9'
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 3600

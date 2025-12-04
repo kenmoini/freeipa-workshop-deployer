@@ -1,0 +1,53 @@
+/* Custom styles for the minimal theme */
+
+.main-nav {
+  margin-top: 20px;
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav li {
+  margin-bottom: 5px;
+}
+
+.main-nav li.menu-section {
+  font-weight: bold;
+  color: #222;
+  margin-top: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 5px;
+}
+
+.main-nav li a {
+  display: block;
+  padding: 5px 0;
+  color: #727272;
+  text-decoration: none;
+}
+
+.main-nav li a:hover {
+  color: #069;
+  text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media print, screen and (max-width: 960px) {
+  .wrapper {
+    width: auto;
+    margin: 0;
+  }
+}
+
+@media print, screen and (max-width: 720px) {
+  .wrapper {
+    padding: 15px;
+  }
+  
+  .main-nav {
+    margin-top: 10px;
+  }
+}

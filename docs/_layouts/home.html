@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<div class="home">
+    {{ content }}
+
+    <div class="quick-links">
+        <h2>Documentation Sections</h2>
+        <ul>
+            <li>
+                <a href="{{ '/overview/' | relative_url }}">
+                    <h3>Overview</h3>
+                    <p>Project overview, goals, and key features</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ '/architecture/' | relative_url }}">
+                    <h3>Architecture</h3>
+                    <p>System architecture and components</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ '/technical-setup/' | relative_url }}">
+                    <h3>Technical Setup</h3>
+                    <p>Installation and configuration guide</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ '/deployment/' | relative_url }}">
+                    <h3>Deployment</h3>
+                    <p>Development and production deployment guides</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

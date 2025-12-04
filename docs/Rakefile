@@ -1,0 +1,30 @@
+require 'html-proofer'
+
+desc "Build the site"
+task :build do
+  sh "bundle exec jekyll build"
+end
+
+desc "Serve the site locally"
+task :serve do
+  sh "bundle exec jekyll serve"
+end
+
+desc "Test the built site"
+task :test do
+  sh "bundle exec jekyll build"
+  options = { 
+    :assume_extension => true,
+    :empty_alt_ignore => true,
+    :url_ignore => [/github\.com/]
+  }
+  HTMLProofer.check_directory("./_site", options).run
+end
+
+desc "Clean the site"
+task :clean do
+  sh "bundle exec jekyll clean"
+end
+
+desc "Build and serve the site"
+task :default => :serve

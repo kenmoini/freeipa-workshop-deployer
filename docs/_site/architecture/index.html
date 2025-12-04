@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Architecture | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Architecture" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/architecture/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/architecture/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Architecture" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Architecture","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/architecture/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/style.css?v=dea3c18865ff122f69b9eba5b7b87ec812ed2d44">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- custom head content -->
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/custom.css">
+
+<!-- Icons -->
+<link rel="shortcut icon" type="image/x-icon" href="/freeipa-workshop-deployer/assets/img/favicon.ico">
+
+<!-- RSS -->
+<link type="application/atom+xml" rel="alternate" href="https://tosin2013.github.io/freeipa-workshop-deployer/feed.xml" title="FreeIPA Workshop Deployer" />
+
+<!-- SEO -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Architecture | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Architecture" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/architecture/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/architecture/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Architecture" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"Architecture","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/architecture/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="https://tosin2013.github.io/freeipa-workshop-deployer/">FreeIPA Workshop Deployer</a></h1>
+
+        
+          <img src="/freeipa-workshop-deployer/assets/img/logo.png" alt="Logo" />
+        
+
+        <p>Documentation for automated FreeIPA deployment and configuration</p>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/freeipa-workshop-deployer/overview/">Overview</a></li>
+            <li><a href="/freeipa-workshop-deployer/architecture/">Architecture</a></li>
+            <li><a href="/freeipa-workshop-deployer/technical-setup/">Technical Setup</a></li>
+            <li><a href="/freeipa-workshop-deployer/deployment/">Deployment</a></li>
+            <li class="menu-section">Guides</li>
+            <li><a href="/freeipa-workshop-deployer/scripts/configuration/">Configuration</a></li>
+            <li><a href="/freeipa-workshop-deployer/scripts/validation/">Validation</a></li>
+            <li class="menu-section">Integration</li>
+            <li><a href="/freeipa-workshop-deployer/integration/openshift/">OpenShift</a></li>
+          </ul>
+        </nav>
+
+        
+        <p class="view"><a href="https://github.com/tosin2013/freeipa-workshop-deployer">View the Project on GitHub <small>tosin2013/freeipa-workshop-deployer</small></a></p>
+        
+
+        
+      </header>
+      <section>
+
+      <article class="page">
+    <h1>Architecture</h1>
+    <div class="content">
+        <h1 id="system-architecture">System Architecture</h1>
+
+<p>The FreeIPA Workshop Deployer is built using Infrastructure as Code (IaC) principles, with a modular architecture that ensures flexibility and maintainability.</p>
+
+<h2 id="key-components">Key Components</h2>
+
+<h3 id="1-infrastructure-layer">1. Infrastructure Layer</h3>
+
+<ul>
+  <li><strong>Providers:</strong>
+    <ul>
+      <li>AWS (EC2, Route53, VPC)</li>
+      <li>DigitalOcean (Droplets, DNS)</li>
+      <li>kcli (local virtualization)</li>
+    </ul>
+  </li>
+  <li><strong>Configuration:</strong> Managed through Terraform scripts</li>
+  <li><strong>Features:</strong>
+    <ul>
+      <li>Multiple provider support</li>
+      <li>Automated resource provisioning</li>
+      <li>Infrastructure state management</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2-configuration-layer">2. Configuration Layer</h3>
+
+<ul>
+  <li><strong>Ansible Playbooks:</strong>
+    <ul>
+      <li>Automate FreeIPA server configuration</li>
+      <li>Handle DNS setup and user provisioning</li>
+      <li>Manage certificates and security settings</li>
+    </ul>
+  </li>
+  <li><strong>Modules:</strong>
+    <ul>
+      <li>Package installation</li>
+      <li>Service management</li>
+      <li>File manipulation</li>
+      <li>System configuration</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3-dns-management">3. DNS Management</h3>
+
+<ul>
+  <li><strong>Dynamic DNS:</strong>
+    <ul>
+      <li>Python-based implementation</li>
+      <li>Ansible playbook integration</li>
+      <li>Profile-based configuration</li>
+    </ul>
+  </li>
+  <li><strong>Features:</strong>
+    <ul>
+      <li>Dynamic updates</li>
+      <li>Profile-based management</li>
+      <li>Cloud provider integration</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="architecture-patterns">Architecture Patterns</h2>
+
+<h3 id="modular-design">Modular Design</h3>
+<ul>
+  <li>Components are loosely coupled</li>
+  <li>Easy to maintain and scale</li>
+  <li>Flexible provider support</li>
+</ul>
+
+<h3 id="infrastructure-as-code">Infrastructure as Code</h3>
+<ul>
+  <li>All infrastructure defined in code</li>
+  <li>Version-controlled configurations</li>
+  <li>Reproducible deployments</li>
+  <li>State management</li>
+</ul>
+
+<h3 id="configuration-management">Configuration Management</h3>
+<ul>
+  <li>Consistent system configurations</li>
+  <li>Automated deployments</li>
+  <li>Idempotent operations</li>
+  <li>Role-based organization</li>
+</ul>
+
+<h3 id="dynamic-dns-management">Dynamic DNS Management</h3>
+<ul>
+  <li>Flexible DNS configurations</li>
+  <li>Profile-based management</li>
+  <li>Automated updates</li>
+  <li>Provider integration</li>
+</ul>
+
+<h2 id="key-technical-decisions">Key Technical Decisions</h2>
+
+<h3 id="terraform-selection">Terraform Selection</h3>
+<ul>
+  <li>Robust infrastructure provisioning</li>
+  <li>Multi-provider support</li>
+  <li>State management capabilities</li>
+  <li>Strong community support</li>
+</ul>
+
+<h3 id="ansible-implementation">Ansible Implementation</h3>
+<ul>
+  <li>Powerful configuration management</li>
+  <li>Easy to understand YAML syntax</li>
+  <li>Extensive module library</li>
+  <li>Agentless architecture</li>
+</ul>
+
+<h3 id="python-integration">Python Integration</h3>
+<ul>
+  <li>Dynamic DNS management</li>
+  <li>Extensive standard library</li>
+  <li>Rich ecosystem of packages</li>
+  <li>Cross-platform compatibility</li>
+</ul>
+
+<h3 id="shell-scripting">Shell Scripting</h3>
+<ul>
+  <li>Deployment automation</li>
+  <li>Configuration scripts</li>
+  <li>System integration</li>
+  <li>Environment setup</li>
+</ul>
+
+    </div>
+</article>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/tosin2013">tosin2013</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/freeipa-workshop-deployer/assets/js/scale.fix.js"></script>
+  </body>
+</html>

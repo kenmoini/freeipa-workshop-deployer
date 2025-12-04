@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>README | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="README" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/readme/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/readme/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="README" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"README","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/readme/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/style.css?v=dea3c18865ff122f69b9eba5b7b87ec812ed2d44">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- custom head content -->
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/freeipa-workshop-deployer/assets/css/custom.css">
+
+<!-- Icons -->
+<link rel="shortcut icon" type="image/x-icon" href="/freeipa-workshop-deployer/assets/img/favicon.ico">
+
+<!-- RSS -->
+<link type="application/atom+xml" rel="alternate" href="https://tosin2013.github.io/freeipa-workshop-deployer/feed.xml" title="FreeIPA Workshop Deployer" />
+
+<!-- SEO -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>README | FreeIPA Workshop Deployer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="README" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for automated FreeIPA deployment and configuration" />
+<meta property="og:description" content="Documentation for automated FreeIPA deployment and configuration" />
+<link rel="canonical" href="https://tosin2013.github.io/freeipa-workshop-deployer/readme/" />
+<meta property="og:url" content="https://tosin2013.github.io/freeipa-workshop-deployer/readme/" />
+<meta property="og:site_name" content="FreeIPA Workshop Deployer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="README" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for automated FreeIPA deployment and configuration","headline":"README","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://tosin2013.github.io/freeipa-workshop-deployer/assets/img/logo.png"}},"url":"https://tosin2013.github.io/freeipa-workshop-deployer/readme/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="https://tosin2013.github.io/freeipa-workshop-deployer/">FreeIPA Workshop Deployer</a></h1>
+
+        
+          <img src="/freeipa-workshop-deployer/assets/img/logo.png" alt="Logo" />
+        
+
+        <p>Documentation for automated FreeIPA deployment and configuration</p>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/freeipa-workshop-deployer/overview/">Overview</a></li>
+            <li><a href="/freeipa-workshop-deployer/architecture/">Architecture</a></li>
+            <li><a href="/freeipa-workshop-deployer/technical-setup/">Technical Setup</a></li>
+            <li><a href="/freeipa-workshop-deployer/deployment/">Deployment</a></li>
+            <li class="menu-section">Guides</li>
+            <li><a href="/freeipa-workshop-deployer/scripts/configuration/">Configuration</a></li>
+            <li><a href="/freeipa-workshop-deployer/scripts/validation/">Validation</a></li>
+            <li class="menu-section">Integration</li>
+            <li><a href="/freeipa-workshop-deployer/integration/openshift/">OpenShift</a></li>
+          </ul>
+        </nav>
+
+        
+        <p class="view"><a href="https://github.com/tosin2013/freeipa-workshop-deployer">View the Project on GitHub <small>tosin2013/freeipa-workshop-deployer</small></a></p>
+        
+
+        
+      </header>
+      <section>
+
+      <article class="page">
+    <h1>README</h1>
+    <div class="content">
+        <h1 id="freeipa-workshop-deployer">FreeIPA Workshop Deployer</h1>
+
+<p>A comprehensive solution for deploying FreeIPA/Red Hat Identity Management Server across multiple infrastructure providers (AWS, DigitalOcean, kcli) using Terraform and Ansible.</p>
+
+<h2 id="system-requirements">System Requirements</h2>
+
+<ul>
+  <li><strong>Operating System:</strong> RHEL 9.5 (Primary supported platform)</li>
+  <li><strong>Memory:</strong> Minimum 4GB RAM (8GB recommended)</li>
+  <li><strong>CPU:</strong> 2+ cores recommended</li>
+  <li><strong>Storage:</strong> 20GB+ available storage</li>
+  <li><strong>Network Ports:</strong>
+    <ul>
+      <li>22 (SSH)</li>
+      <li>53 (DNS)</li>
+      <li>80/443 (HTTP/HTTPS)</li>
+      <li>389/636 (LDAP/LDAPS)</li>
+      <li>88/464 (Kerberos)</li>
+      <li>123 (NTP)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="dependencies">Dependencies</h3>
+
+<h4 id="system-packages">System Packages</h4>
+<ul>
+  <li>git</li>
+  <li>curl</li>
+  <li>wget</li>
+  <li>unzip</li>
+  <li>python3</li>
+  <li>python3-pip</li>
+  <li>firewalld</li>
+  <li>ansible-core</li>
+</ul>
+
+<h4 id="python-packages">Python Packages</h4>
+<ul>
+  <li>dnspython</li>
+  <li>netaddr</li>
+</ul>
+
+<h4 id="infrastructure-tools">Infrastructure Tools</h4>
+<ul>
+  <li>Terraform (v0.13.4)</li>
+  <li>AWS CLI, DigitalOcean CLI, or kcli</li>
+</ul>
+
+<h2 id="quick-start">Quick Start</h2>
+
+<h3 id="1-bootstrap-the-environment">1. Bootstrap the Environment</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Clone the repository</span>
+git clone https://github.com/yourusername/freeipa-workshop-deployer.git
+<span class="nb">cd </span>freeipa-workshop-deployer
+
+<span class="c"># Run bootstrap script (requires root/sudo)</span>
+<span class="nb">sudo</span> ./bootstrap.sh
+</code></pre></div></div>
+
+<p>The bootstrap script:</p>
+<ul>
+  <li>Verifies RHEL 9.5</li>
+  <li>Installs required packages</li>
+  <li>Sets up Terraform</li>
+  <li>Configures Python dependencies</li>
+  <li>Sets up firewall rules</li>
+  <li>Creates initial configuration</li>
+</ul>
+
+<h3 id="2-validate-the-environment">2. Validate the Environment</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Run validation script</span>
+<span class="nb">sudo</span> ./validate.sh
+</code></pre></div></div>
+
+<p>The validation script checks:</p>
+<ul>
+  <li>RHEL 9.5 compatibility</li>
+  <li>Required packages and tools</li>
+  <li>Python dependencies</li>
+  <li>Firewall configuration</li>
+  <li>Infrastructure provider requirements</li>
+</ul>
+
+<h3 id="3-quick-deployment">3. Quick Deployment</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">quick-deploy.sh</code> script provides a streamlined way to deploy and manage FreeIPA across different providers:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Deploy using kcli</span>
+./quick-deploy.sh kcli deploy
+
+<span class="c"># Deploy using AWS</span>
+<span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>xxx <span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>yyy ./quick-deploy.sh aws deploy
+
+<span class="c"># Deploy using DigitalOcean</span>
+<span class="nv">DO_PAT</span><span class="o">=</span>xxx ./quick-deploy.sh <span class="k">do </span>deploy
+
+<span class="c"># Destroy deployment</span>
+./quick-deploy.sh <span class="o">[</span>aws|do|kcli] destroy
+</code></pre></div></div>
+
+<h4 id="environment-variables-for-customization">Environment Variables for Customization</h4>
+
+<p>Common variables:</p>
+<ul>
+  <li>DOMAIN: Custom domain name (default: example.com)</li>
+  <li>DNS_FORWARDER: Custom DNS forwarder (default: 1.1.1.1)</li>
+  <li>IDM_HOSTNAME: Custom IdM hostname (default: idm)</li>
+</ul>
+
+<p>Provider-specific variables:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># AWS</span>
+<span class="nv">AWS_REGION</span><span class="o">=</span>us-east-2
+<span class="nv">AWS_VPC_ID</span><span class="o">=</span>vpc-xxx
+
+<span class="c"># DigitalOcean</span>
+<span class="nv">DO_DATA_CENTER</span><span class="o">=</span>nyc3
+<span class="nv">DO_VPC_CIDR</span><span class="o">=</span>10.42.0.0/24
+<span class="nv">DO_NODE_IMAGE</span><span class="o">=</span>centos-8-x64
+<span class="nv">DO_NODE_SIZE</span><span class="o">=</span>s-1vcpu-2gb
+
+<span class="c"># kcli</span>
+<span class="nv">KCLI_NETWORK</span><span class="o">=</span>qubinet
+<span class="nv">COMMUNITY_VERSION</span><span class="o">=</span><span class="nb">false</span>  <span class="c"># Set to true for CentOS</span>
+</code></pre></div></div>
+
+<h2 id="traditional-deployment-method">Traditional Deployment Method</h2>
+
+<p>If you prefer the traditional deployment method:</p>
+
+<ol>
+  <li>Copy <code class="language-plaintext highlighter-rouge">example.vars.sh</code> to <code class="language-plaintext highlighter-rouge">vars.sh</code></li>
+  <li>Configure your provider credentials and settings</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">./total_deployer.sh</code></li>
+</ol>
+
+<h2 id="monitoring-and-alerts">Monitoring and Alerts</h2>
+
+<p>The deployment includes basic monitoring capabilities. For production environments, it’s recommended to:</p>
+<ul>
+  <li>Set up performance metrics collection</li>
+  <li>Configure health checks</li>
+  <li>Implement alert notifications</li>
+  <li>Monitor service availability</li>
+  <li>Track resource utilization</li>
+</ul>
+
+<p>For enhanced monitoring, consider integrating with cloud provider monitoring solutions.</p>
+
+<h2 id="backup-and-recovery">Backup and Recovery</h2>
+
+<p>Implement proper backup procedures for production deployments:</p>
+<ul>
+  <li>Regular automated backups</li>
+  <li>Point-in-time recovery options</li>
+  <li>Backup validation</li>
+  <li>Disaster recovery planning</li>
+</ul>
+
+<p>Refer to the <a href="/technical-setup/">documentation</a> for detailed backup configuration.</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>The project includes comprehensive testing covering:</p>
+<ul>
+  <li>Environment validation</li>
+  <li>Infrastructure deployment</li>
+  <li>Service configuration</li>
+  <li>DNS management</li>
+  <li>Integration testing</li>
+</ul>
+
+<p>For detailed testing information, see the <a href="/testing.html">testing documentation</a>.</p>
+
+<h2 id="connecting-to-openshift">Connecting to OpenShift</h2>
+
+<ol>
+  <li>Download the CA Cert from <code class="language-plaintext highlighter-rouge">/etc/ipa/ca.crt</code> or via the IPA Web Console at <strong><em>Authentication &gt; Certificates &gt; 1 &gt; Actions &gt; Download Certificate</em></strong></li>
+  <li>Configure a new OAuth Identity Provider with these settings:
+    <ul>
+      <li>email: mail</li>
+      <li>id: dn</li>
+      <li>name: cn</li>
+      <li>preferredUsername: uid</li>
+      <li>bindDN: ‘uid=admin,cn=users,cn=accounts,dc=example,dc=com’</li>
+      <li>bindPassword: (your password)</li>
+      <li>ca: fromDownloadedFile</li>
+      <li>url: ldaps://idm.example.com:636/cn=users,cn=accounts,dc=example,dc=com?uid?sub?(uid=*)</li>
+      <li>name: LDAP</li>
+    </ul>
+  </li>
+</ol>
+
+<p>For YAML configuration example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">config.openshift.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">OAuth</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="na">release.openshift.io/create-only</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">cluster</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">identityProviders</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">ldap</span><span class="pi">:</span>
+        <span class="na">attributes</span><span class="pi">:</span>
+          <span class="na">email</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">mail</span>
+          <span class="na">id</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">dn</span>
+          <span class="na">name</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">cn</span>
+          <span class="na">preferredUsername</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">uid</span>
+        <span class="na">bindDN</span><span class="pi">:</span> <span class="s1">'</span><span class="s">uid=admin,cn=users,cn=accounts,dc=example,dc=com'</span>
+        <span class="na">bindPassword</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">ldap-bind-password</span>
+        <span class="na">ca</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">ldap-ca</span>
+        <span class="na">insecure</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">url</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+          <span class="s">ldaps://idm.example.com:636/cn=users,cn=accounts,dc=example,dc=com?uid?sub?(uid=*)</span>
+      <span class="na">mappingMethod</span><span class="pi">:</span> <span class="s">claim</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">WorkshopLDAP</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">LDAP</span>
+</code></pre></div></div>
+
+<h2 id="documentation">Documentation</h2>
+
+<ul>
+  <li><a href="/technical-setup/">Technical Setup</a></li>
+  <li><a href="/deployment/">Deployment Guide</a></li>
+  <li><a href="/architecture/">Architecture Overview</a></li>
+  <li><a href="/scripts/configuration/">Configuration Scripts</a></li>
+  <li><a href="/scripts/validation/">Validation and Deployment</a></li>
+  <li><a href="/dns_profiles.html">DNS Profiles</a></li>
+  <li><a href="/dynamic_dns.html">Dynamic DNS Management</a></li>
+  <li><a href="/testing.html">Testing Guide</a></li>
+  <li><a href="/integration/openshift/">OpenShift Integration</a></li>
+</ul>
+
+<h2 id="contributing">Contributing</h2>
+
+<ol>
+  <li>Fork the repository</li>
+  <li>Create your feature branch</li>
+  <li>Submit a pull request</li>
+</ol>
+
+<h2 id="license">License</h2>
+
+<p>See LICENSE file for details.</p>
+
+    </div>
+</article>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/tosin2013">tosin2013</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/freeipa-workshop-deployer/assets/js/scale.fix.js"></script>
+  </body>
+</html>
